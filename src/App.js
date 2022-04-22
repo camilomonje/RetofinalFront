@@ -1,8 +1,8 @@
+import Home from './components/Pages/Home'
+
 function App() {
   return (
-    <div >
-      Foodka
-    </div>
+    <Home />
   );
 }
 
