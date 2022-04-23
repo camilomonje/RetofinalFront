@@ -1,3 +1,7 @@
+Redux 
+npm install @reduxjs/toolkit react-redux
+
+
 Formulario y validaciones 
 npm install -S yup
 npm i formik

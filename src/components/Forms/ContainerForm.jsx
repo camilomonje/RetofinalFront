@@ -11,25 +11,14 @@ import { RadioButtons } from './RadioButtons';
 import { DateField } from './DateField';
 import { TextAreaField } from './TextAreaField';
 
+import { useSelector } from 'react-redux';
 
-const validationSchema = yup.object({
-  name: yup.string().required("Nombre es requerido"),
-  email: yup.string().email('Email is required').required("Email es requerido"),
-  number: yup.number().required("Numero es requerido")
-})
+
 
 export const ContainerForm = () => {
 
-    const [value, setValue] = useState(new Date())
-    const [horarioValue, setHorarioValue] = useState({
-    de12a14: {value: '12:00-14:00', disabled:false},
-    de14a16: {value: '14:00-16:00', disabled:false},
-    de16a18: {value: '16:00-18:00', disabled:false},
-    de18a20: {value: '18:00-20:00', disabled:false},
-    de20a22: {value: '20:00-22:00', disabled:false}
-    })
-
-    console.log(horarioValue)
+    const {multiStepFormValue} = useSelector( state => state.formState )   
+ 
   return (
     <Card variant="outlined" style={{maxWidth:605,minHeight:205 ,margin:"0 auto", padding:'20px 5px', marginTop:200}}>
     <div className="App">
@@ -39,26 +28,22 @@ export const ContainerForm = () => {
             name:'',
             email:'',
             number: 0,
-            date: value,
+            date: '',
             hora: '',
             pedido:''
           }}
           onSubmit={values => {
-            alert(JSON.stringify(values, null, 2));
+            alert(JSON.stringify(multiStepFormValue, null, 2));
           }}
         >
           <FormStep 
             stepName='Date' 
-            onSubmit={()=> console.log("Step 1 submit")} 
-            validationSchema={yup.object({
-            })}
+            onSubmit={()=> console.log("Step 1 submit")}
           >
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateField 
                   name='date' 
                   label='Date'
-                  setValue={setValue}
-                  value={value}
                 />
               </LocalizationProvider>
           </FormStep>
@@ -66,19 +51,13 @@ export const ContainerForm = () => {
           <FormStep 
             stepName='Hora' 
             onSubmit={()=> console.log("Step 2 submit")} 
-            validationSchema={yup.object({
-            })}
           >
-              <RadioButtons
-                horarioValue={horarioValue}
-                setHorarioValue={setHorarioValue}
-              />
+              <RadioButtons/>
           </FormStep>
 
           <FormStep 
             stepName='Contacto' 
             onSubmit={()=> console.log("Step 3 submit")} 
-            validationSchema={validationSchema}
           >
               <InputField 
                 name='name' 
@@ -99,9 +78,6 @@ export const ContainerForm = () => {
           <FormStep 
             stepName='Pedido' 
             onSubmit={()=> console.log("Step 4 submit")} 
-            validationSchema={yup.object({
-              pedido: yup.string().required('Pedido es requerido')
-            })}
           >
               <TextAreaField
                 name='pedido' 
