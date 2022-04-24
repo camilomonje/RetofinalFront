@@ -1,17 +1,16 @@
-import Home from './components/Pages/Home'
-
 import { ThemeProvider} from '@mui/material/styles';
 import { theme } from './components/theme/theme';
-import { ContainerForm } from './components/Forms/ContainerForm';
-
+import Navegacion from './components/Navbar/Navegacion';
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <ThemeProvider theme={theme} >
-      <Home />
-      <ContainerForm />
+    <ThemeProvider theme={ theme } >
+      <div className="container">
+        <Navegacion/>
+        <Outlet/>
+      </div>
     </ThemeProvider>
-    
   );
 }
 
