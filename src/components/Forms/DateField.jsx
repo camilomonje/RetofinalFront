@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextField } from '@mui/material'
+import { TextField, Typography } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers'
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,9 @@ export const DateField = ({label}) => {
   
   const dispatchDia = useDispatch()
   const {multiStepFormValue} = useSelector( state => state.formState )
-      return (
+      return (<>
+        
+        <Typography textAlign={'center'} style={{marginTop:"40px", padding:'5px 5px'}}>Escoja Un Dia</Typography>
         <DatePicker
           label={label}
           value={multiStepFormValue.dia}
@@ -22,6 +24,7 @@ export const DateField = ({label}) => {
           {...params}
           />}
         />
+        </>
     )
   }
   

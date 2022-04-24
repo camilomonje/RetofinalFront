@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useDispatch} from 'react-redux';
 import { guardarPedido } from '../../store/slices/formState';
@@ -13,6 +13,8 @@ export const TextAreaField = ({label}) => {
     }
   
       return (
+        <>
+        <Typography textAlign={'center'} style={{marginTop:"40px", padding:'5px 5px'}}>Escoja Un Dia</Typography>
       <TextField
           multiline={true}
           minRows={3}
@@ -21,5 +23,6 @@ export const TextAreaField = ({label}) => {
           onChange={handleChange}
           style={{marginTop:30}}
       />
+      </>
     )
   }

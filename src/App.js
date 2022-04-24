@@ -16,8 +16,6 @@ function App() {
       <CustomizedDialogs>
         <ContainerForm />
       </CustomizedDialogs>
-      <ContainerForm />
-
     </ThemeProvider>
     </Provider>
   );
