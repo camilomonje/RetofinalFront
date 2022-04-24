@@ -1,36 +1,30 @@
-import { TextField } from '@mui/material'
-import { DatePicker } from '@mui/x-date-pickers'
-import { useField } from 'formik'
 import React from 'react'
+import { TextField, Typography } from '@mui/material'
+import { DatePicker } from '@mui/x-date-pickers'
+
+import { useDispatch, useSelector } from 'react-redux';
+import { guardarDia } from '../../store/slices/formState';
 
 
-export const DateField = ({setValue,value,label, ...props}) => {
+
+export const DateField = ({label}) => {
   
-    const [field, meta] = useField(props)
-    
-    console.log(value)
-    console.log(props)
-    console.log(field)
-  
-      return (
-        <DatePicker
+  const dispatchDia = useDispatch()
+  const {multiStepFormValue} = useSelector( state => state.formState )
+      return (<>
         
+        <Typography textAlign={'center'} style={{marginTop:"40px", padding:'5px 5px'}}>Escoja Un Dia</Typography>
+        <DatePicker
           label={label}
-          {...field}
-          {...props}
-          error={ meta.touched && Boolean(meta.error) }
-          helperText={meta.touched && meta.error}
-          
+          value={multiStepFormValue.dia}
           onChange={(value) => {
-            setValue(value);
-            props.value = value
-            //props.value = value
+            dispatchDia(guardarDia(value.toString()))
           }}
-          value={value}
           renderInput={(params) => <TextField fullWidth style={{marginTop:"30px"}}
           {...params}
           />}
         />
+        </>
     )
   }
   
