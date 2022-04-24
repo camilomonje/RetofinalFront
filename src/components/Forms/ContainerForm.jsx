@@ -20,7 +20,7 @@ export const ContainerForm = () => {
     const {multiStepFormValue} = useSelector( state => state.formState )   
  
   return (
-    <Card variant="outlined" style={{maxWidth:605,minHeight:205 ,margin:"0 auto", padding:'20px 5px', marginTop:200}}>
+    <Card variant="outlined" style={{maxWidth:605,minHeight:205 ,minWidth:435, margin:"0 auto", padding:'20px 5px'}}>
     <div className="App">
       <header className="App-header">
         <MultiStepForm
