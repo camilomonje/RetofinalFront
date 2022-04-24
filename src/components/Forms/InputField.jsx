@@ -1,13 +1,10 @@
 import React from 'react'
 import { TextField } from '@mui/material'
-import { useField } from 'formik'
 
 import { useDispatch } from 'react-redux';
 import { guardarEmail, guardarNombre, guardarNumero } from '../../store/slices/formState';
 
-export const InputField = ({label, ...props}) => {
-  
-  const [field, meta] = useField(props)
+export const InputField = ({label}) => {
 
   const dispatchName = useDispatch()
   const dispatchEmail = useDispatch()
@@ -19,7 +16,7 @@ export const InputField = ({label, ...props}) => {
         break;
       case 'Email': dispatchEmail(guardarEmail(e.target.value.toString()));
         break;
-      case 'Phone Number': dispatchNumero(guardarNumero(e.target.value.toString()))
+      case 'Apellido': dispatchNumero(guardarNumero(e.target.value.toString()))
     }
   }
     return (
@@ -27,8 +24,6 @@ export const InputField = ({label, ...props}) => {
         fullWidth 
         label={label}
         onChange={handleChange}
-        error={ meta.touched && Boolean(meta.error) }
-        helperText={meta.touched && meta.error}
         style={{marginTop:30}}
         
     />

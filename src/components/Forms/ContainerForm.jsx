@@ -34,6 +34,7 @@ export const ContainerForm = () => {
           }}
           onSubmit={values => {
             alert(JSON.stringify(multiStepFormValue, null, 2));
+            console.log(multiStepFormValue)
           }}
         >
           <FormStep 
@@ -52,27 +53,29 @@ export const ContainerForm = () => {
             stepName='Hora' 
             onSubmit={()=> console.log("Step 2 submit")} 
           >
-              <RadioButtons/>
+                <RadioButtons/>
           </FormStep>
 
           <FormStep 
             stepName='Contacto' 
             onSubmit={()=> console.log("Step 3 submit")} 
           >
-              <InputField 
+            <InputField 
                 name='name' 
                 label='Nombre' 
               />
 
-              <InputField 
-                name='email' 
-                label='Email' 
+            <InputField 
+                name='number' 
+                label='Apellido' 
               />
 
-          <InputField 
-                name='number' 
-                label='Phone Number' 
-              />
+            <InputField 
+                name='email' 
+                label='Email'
+            />
+
+          
           </FormStep>
 
           <FormStep 
