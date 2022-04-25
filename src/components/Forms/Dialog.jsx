@@ -75,7 +75,6 @@ export default function CustomizedDialogs({ children }) {
     </div>
   )
 }
-<<<<<<< HEAD
 
 /*
 <div >
@@ -104,5 +103,3 @@ export default function CustomizedDialogs({ children }) {
     </div>
 
 */
-=======
->>>>>>> 7c4861f0789fe9bb4e08fc9a785d9b79c75b77f6
