@@ -13,11 +13,42 @@ import { TextAreaField } from './TextAreaField';
 import { useSelector } from 'react-redux';
 
 
+const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
+
+
+
+
+
 
 export const ContainerForm = () => {
 
     const {multiStepFormValue} = useSelector( state => state.formState )   
  
+    const postReserva = () => {
+      fetch(`${baseURL}api/reserva`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cliente:{
+            apellido: multiStepFormValue.cliente.apellido,
+            email: multiStepFormValue.cliente.email,
+            nombre: multiStepFormValue.cliente.nombre,
+          },
+          dia: multiStepFormValue.dia,
+          hora: multiStepFormValue.hora,
+          mensaje: multiStepFormValue.mensaje,
+        }),
+        
+      }).then(res => res.json())
+      .then(res => console.log(res))
+      
+      ;
+    };
+
+
   return (
     <Card variant="outlined" style={{maxWidth:605,minHeight:205 ,minWidth:435, margin:"0 auto", padding:'20px 5px'}}>
     <div className="App">
@@ -33,6 +64,7 @@ export const ContainerForm = () => {
           }}
           onSubmit={values => {
             alert(JSON.stringify(multiStepFormValue, null, 2));
+            postReserva()
             console.log(multiStepFormValue)
           }}
         >
