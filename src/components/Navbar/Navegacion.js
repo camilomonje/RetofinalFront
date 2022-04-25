@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
+import { ContainerForm } from '../Forms/ContainerForm';
+import CustomizedDialogs from '../Forms/Dialog';
 
 const Navegacion = () => {
 
@@ -11,10 +13,13 @@ const Navegacion = () => {
 
   return <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <Link onClick={ ()=> showSwitch()} to="/" className="navbar-brand">
+    <Link onClick={ ()=> showSwitch()} to="/" className="navbar-brand" >
       Foodka
     </Link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -25,12 +30,13 @@ const Navegacion = () => {
         <li class="nav-item">
           <Link onClick={ ()=> showSwitch()} to="/contacto" className="nav-link">Contáctenos</Link>
         </li>
-        <li class="nav-item">
-          <Link onClick={ ()=> showSwitch()} to="/reservar" className="nav-link">Reservar</Link>
-        </li>
       </ul>
+      <CustomizedDialogs>
+        <ContainerForm />
+      </CustomizedDialogs>
     </div>
   </div>
+
 </nav>
 };
 
