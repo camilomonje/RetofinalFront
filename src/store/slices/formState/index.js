@@ -19,7 +19,7 @@ export const formStateSlice = createSlice({
                 nombre:'',
             },
             dia: new Date().toString(),
-            hora: '',
+            hora: '12:00',
             mensaje:'',
             telefono: 0
         },

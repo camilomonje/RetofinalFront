@@ -19,23 +19,18 @@ const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
 
 
 
-
-
-
 export const ContainerForm = () => {
 
     const {multiStepFormValue, id} = useSelector( state => state.formState )
     const dispatchId = useDispatch()
     const dispatchPost = useDispatch()
- 
-    const {dia} = multiStepFormValue;
+
     
     const formatDate = (string)=>{
       let date = new Date(string)
     let formatted_date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
      return formatted_date;
     }
-    //let diaParseadito = formatDate(dia)
 
     const postReserva = () => {
       fetch(`${baseURL}api/reserva`, {
@@ -65,7 +60,7 @@ export const ContainerForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          cantidadPersonas: 0,
+          cantidadPersonas:  multiStepFormValue.cantidadPersonas,
           cliente:{
             apellido: multiStepFormValue.cliente.apellido,
             email: multiStepFormValue.cliente.email,
@@ -74,12 +69,35 @@ export const ContainerForm = () => {
           dia: formatDate(multiStepFormValue.dia),
           hora: multiStepFormValue.hora,
           mensaje: multiStepFormValue.mensaje,
-          telefono: 0
+          telefono: multiStepFormValue.telefono
         }),
         
       }).then(res => res.json())
       .then(res => console.log(res))
       ;
+    };
+
+    const postEmail = () => {
+      fetch(`${baseURL}api/reserva/sendEmail`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cantidadPersonas: multiStepFormValue.cantidadPersonas,
+          cliente:{
+            apellido: multiStepFormValue.cliente.apellido,
+            email: multiStepFormValue.cliente.email,
+            nombre: multiStepFormValue.cliente.nombre,
+          },
+          dia: formatDate(multiStepFormValue.dia),
+          hora: multiStepFormValue.hora,
+          id: id,
+          mensaje: multiStepFormValue.mensaje,
+          telefono: multiStepFormValue.telefono
+        }),
+      }).then(res => res).then(res => console.log(res)).catch(err => console.log(err))
     };
 
 
@@ -100,6 +118,7 @@ export const ContainerForm = () => {
             alert(JSON.stringify(multiStepFormValue, null, 2));
             
             putReserva(id)
+            postEmail()
             console.log(multiStepFormValue)
           }}
         >
