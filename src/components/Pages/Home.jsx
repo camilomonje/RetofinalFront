@@ -140,8 +140,6 @@ const Home = () => {
         </div>
       </div>
       </div>
-      <About/>
-      <Contact/>
       <Footer />
     </div>
   )
