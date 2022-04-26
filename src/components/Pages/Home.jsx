@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div>
       <div className="card mb-3 align-items-center">
-        <img src={imagenlogo} className="figure-img img-fluid rounded" />
+        <img src={imagenlogo} className="img-fluid" />
       </div>
       <div className="row">
         <div className="col-sm-6">

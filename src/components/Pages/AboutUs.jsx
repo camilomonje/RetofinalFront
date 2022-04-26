@@ -56,7 +56,7 @@ const About = () => {
         <tr>
           <td>Hansee</td>
           <td>QA</td>
-          <td>Email</td>
+          <td>hansee1996@gmail.com</td>
         </tr>
         <tr>
           <td>Jorge</td>
