@@ -46,8 +46,8 @@ const Home = () => {
                     <p>Deliciosos desayunos</p>
                   </div>
                 </div>
-                <div class="carousel-item">
-                  <img src={imagenalmuerzo} class="d-block w-100" alt="..." />
+                <div className="carousel-item">
+                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                 </div>
               </div>
               <button
