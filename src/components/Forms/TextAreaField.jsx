@@ -1,29 +1,21 @@
-import { TextField, Typography } from "@mui/material"
-import React from "react"
-import { useDispatch } from "react-redux"
-import { guardarPedido } from "../../store/slices/formState"
+import { TextField, Typography } from '@mui/material'
+import React from 'react'
+import { useDispatch} from 'react-redux';
+import { guardarPedido } from '../../store/slices/formState';
 
-export const TextAreaField = ({ label }) => {
-  const dispatchPedido = useDispatch()
+export const TextAreaField = ({label}) => {
+  
 
-  const handleChange = (e) => {
-    dispatchPedido(guardarPedido(e.target.value.toString()))
-  }
+    const dispatchPedido = useDispatch()
 
-  return (
-    <>
-      <Typography textAlign={"center"} style={{ marginTop: "40px", padding: "5px 5px" }}>
-        Escribe tu pedido
-      </Typography>
+    const handleChange = (e) => {
+      dispatchPedido(guardarPedido(e.target.value.toString()))
+    }
+  
+      return (
+        <>
+        <Typography textAlign={'center'} style={{marginTop:"40px", padding:'5px 5px'}}>Escoja Un Dia</Typography>
       <TextField
-
-        multiline={true}
-        minRows={3}
-        fullWidth
-        label={label}
-        onChange={handleChange}
-        style={{ marginTop: 30 }}
-
           required
           multiline={true}
           minRows={3}
@@ -31,8 +23,7 @@ export const TextAreaField = ({ label }) => {
           label={label}
           onChange={handleChange}
           style={{marginTop:30}}
-
       />
-    </>
-  )
-}
+      </>
+    )
+  }
