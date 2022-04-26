@@ -6,15 +6,15 @@ import Footer from "./Footer";
 
 const Home = () => {
   return (
-    <div>
-      <div class="card mb-3 align-items-center">
-        <img src={fondo} class="card-img"></img>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+    <div className="fondo max-width: 100%;">
+      <div class="d-flex opacity-50">
+  <div class="flex-shrink-0">
+  <img src={fondo} class="card-img"></img>
+  </div>
+  <div class="flex-grow-1 ms-3">
+    This is some content from a media component. You can replace this with any content and adjust it as needed.
+  </div>
+</div>
       <div class="row">
       <div class="col-sm-6">
         <div class="card">
@@ -105,3 +105,11 @@ const Home = () => {
 }
 
 export default Home
+{/* <div class="card mb-3 align-items-center">
+        <img src={fondo} class="img-fluid"></img>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div> */}

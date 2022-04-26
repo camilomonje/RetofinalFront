@@ -11,7 +11,7 @@ const Navegacion = () => {
     return setShow(!show)
   }
 
-  return <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  return <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <div class="container-fluid">
     <Link onClick={ ()=> showSwitch()} to="/" className="navbar-brand" >
       Foodka
