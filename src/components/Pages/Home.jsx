@@ -5,8 +5,6 @@ import Footer from "./Footer"
 import Dialog from "../Forms/Dialog"
 import Reservar from "./Reservar"
 import ShowReservations from "../Buttons/ShowReservations"
-import Contact from "./ContactUs"
-import About from "./AboutUs"
 
 const Home = () => {
   return (
@@ -37,108 +35,108 @@ const Home = () => {
         </div>
       </div>
       <div className="carrusel">
-      <div className="container mt-5">
-        <div className="row align-items-center">
-          <div className="col-4">
-            <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img src={imagenalmuerzo} className="d-block w-100" />
-                  <div>
-                    <h5 className="nombrescarrusel">Desayunos</h5>
-                    <p className="nombrescarrusel">Deliciosos desayunos</p>
+        <div className="container mt-5">
+          <div className="row align-items-center">
+            <div className="col-4">
+              <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img src={imagenalmuerzo} className="d-block w-100" />
+                    <div>
+                      <h5 className="nombrescarrusel">Desayunos</h5>
+                      <p className="nombrescarrusel">Deliciosos desayunos</p>
+                    </div>
+                  </div>
+                  <div className="carousel-item">
+                    <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                   </div>
                 </div>
-                <div className="carousel-item">
-                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
-                </div>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="prev"
+                >
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="next"
+                >
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
               </div>
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              </button>
             </div>
-          </div>
-          <div className="col-4">
-            <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img src={imagenalmuerzo} className="d-block w-100" />
-                  <div>
-                    <h5 className="nombrescarrusel">Almuerzos</h5>
-                    <p className="nombrescarrusel">Deliciosos almuerzos</p>
+            <div className="col-4">
+              <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img src={imagenalmuerzo} className="d-block w-100" />
+                    <div>
+                      <h5 className="nombrescarrusel">Almuerzos</h5>
+                      <p className="nombrescarrusel">Deliciosos almuerzos</p>
+                    </div>
+                  </div>
+                  <div className="carousel-item">
+                    <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                   </div>
                 </div>
-                <div className="carousel-item">
-                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
-                </div>
-              </div>
 
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              </button>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="prev"
+                >
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="next"
+                >
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+              </div>
             </div>
-          </div>
-          <div className="col-4">
-            <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
-              <div className="carousel-inner">
-                <div className="carousel-item active">
-                  <img src={imagenalmuerzo} className="d-block w-100" />
-                  <div>
-                    <h5 className="nombrescarrusel">Cenas</h5>
-                    <p className="nombrescarrusel">Deliciosas cenas</p>
+            <div className="col-4">
+              <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img src={imagenalmuerzo} className="d-block w-100" />
+                    <div>
+                      <h5 className="nombrescarrusel">Cenas</h5>
+                      <p className="nombrescarrusel">Deliciosas cenas</p>
+                    </div>
+                  </div>
+                  <div className="carousel-item">
+                    <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                   </div>
                 </div>
-                <div className="carousel-item">
-                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
-                </div>
-              </div>
 
-              <button
-                className="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide="prev"
-              >
-                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              </button>
-              <button
-                className="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleDark"
-                data-bs-slide="next"
-              >
-                <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              </button>
+                <button
+                  className="carousel-control-prev"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="prev"
+                >
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button
+                  className="carousel-control-next"
+                  type="button"
+                  data-bs-target="#carouselExampleDark"
+                  data-bs-slide="next"
+                >
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div>
       <Footer />
     </div>
