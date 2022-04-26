@@ -45,7 +45,7 @@ export const MultiStepForm = ({children, initialValues, onSubmit}) => {
         <Formik 
             initialValues={snapshot} 
             onSubmit={handleSubmit} 
-            validationSchema={step.props.validationSchema} 
+            //validationSchema={step.props.validationSchema} 
         >
             {(formik) => 
             <Form>

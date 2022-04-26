@@ -23,8 +23,8 @@ export const DateField = ({label}) => {
           label={label}
           value={multiStepFormValue.dia}
           onChange={(value) => {
-            let valueFormat = formatDate(value)
-            dispatchDia(guardarDia(valueFormat))
+            //let valueFormat = formatDate(value)
+            dispatchDia(guardarDia(value.toString()))
           }}
           renderInput={(params) => <TextField fullWidth style={{marginTop:"30px"}}
           {...params}
