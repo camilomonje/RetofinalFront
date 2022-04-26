@@ -25,7 +25,7 @@ export const InputField = ({label}) => {
         label={label}
         onChange={handleChange}
         style={{marginTop:30}}
-        
+        required
     />
   )
 }
