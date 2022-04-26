@@ -5,13 +5,10 @@ import imagenalmuerzo from "../../assets/img/almuerzo1.jpg"
 import imagenalmuerzo2 from "../../assets/img/carnes.jpg"
 import imagencena from "../../assets/img/cena1.jpg"
 import Footer from "./Footer"
-import Dialog from "../Forms/Dialog"
-import Reservar from "../Pages/Reservar"
-import ShowReservations from "../Buttons/ShowReservations"
 
 const Home = () => {
   return (
-    <div className="container">
+    <div>
       <div className="card mb-3 align-items-center">
         <img src={imagenlogo} className="img-fluid" />
       </div>
@@ -19,25 +16,27 @@ const Home = () => {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Reservar</h5>
-              <p className="card-text">Reserva nuestra mesa exclusiva</p>
-              <Dialog>
-                <Reservar />
-              </Dialog>
+              <h5 className="card-title">Special title treatment</h5>
+              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" className="btn btn-primary">
+                Go somewhere
+              </a>
             </div>
           </div>
         </div>
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Mis reservas</h5>
-              <p className="card-text">¡Busca tus reservas pedientes!</p>
-              <ShowReservations />
+              <h5 className="card-title">Special title treatment</h5>
+              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" className="btn btn-primary">
+                Go somewhere
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <div className="container mt-5">
+      <div className="container">
         <div className="row align-items-center">
           <div className="col-4">
             <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
