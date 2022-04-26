@@ -1,4 +1,4 @@
-import { ThemeProvider} from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { theme } from './components/theme/theme';
 import { Provider } from 'react-redux';
 import store from './store';
@@ -7,11 +7,9 @@ import { Outlet } from "react-router-dom";
 
 function App() {
   return (<Provider store={store} >
-    <ThemeProvider theme={ theme } >
-      <div className="container">
-        <Navegacion/>
-        <Outlet/>
-      </div>
+    <ThemeProvider theme={theme} >
+      <Navegacion />
+      <Outlet />
     </ThemeProvider>
   </Provider>
   );
