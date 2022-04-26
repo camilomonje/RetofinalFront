@@ -1,10 +1,10 @@
 import React from "react"
 import imagenlogo from "../../assets/img/Foodka.jpg"
-import imagendesayuno from "../../assets/img/desayuno3.jpg"
 import imagenalmuerzo from "../../assets/img/almuerzo1.jpg"
-import imagenalmuerzo2 from "../../assets/img/carnes.jpg"
-import imagencena from "../../assets/img/cena1.jpg"
 import Footer from "./Footer"
+import Dialog from "../Forms/Dialog"
+import Reservar from "./Reservar"
+import ShowReservations from "../Buttons/ShowReservations"
 
 const Home = () => {
   return (
@@ -16,27 +16,25 @@ const Home = () => {
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" className="btn btn-primary">
-                Go somewhere
-              </a>
+              <h5 className="card-title">Reserva</h5>
+              <p className="card-text">Reserva nuestra mesa exclusiva</p>
+              <Dialog>
+                <Reservar />
+              </Dialog>
             </div>
           </div>
         </div>
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
-              <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" className="btn btn-primary">
-                Go somewhere
-              </a>
+              <h5 className="card-title">Mis reservas</h5>
+              <p className="card-text">¡Busca aquí tus reservas pendientes!</p>
+              <ShowReservations />
             </div>
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container mt-5">
         <div className="row align-items-center">
           <div className="col-4">
             <div id="carouselExampleDark" className="carousel slide" data-bs-ride="carousel">
@@ -49,7 +47,7 @@ const Home = () => {
                   </div>
                 </div>
                 <div class="carousel-item">
-                  <img src={imagenalmuerzo2} class="d-block w-100" alt="..." />
+                  <img src={imagenalmuerzo} class="d-block w-100" alt="..." />
                 </div>
               </div>
               <button
@@ -80,8 +78,8 @@ const Home = () => {
                     <p>Deliciosos almuerzos</p>
                   </div>
                 </div>
-                <div class="carousel-item">
-                  <img src={imagenalmuerzo2} class="d-block w-100" alt="..." />
+                <div className="carousel-item">
+                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                 </div>
               </div>
 
@@ -113,8 +111,8 @@ const Home = () => {
                     <p>Deliciosas cenas</p>
                   </div>
                 </div>
-                <div class="carousel-item">
-                  <img src={imagenalmuerzo2} class="d-block w-100" alt="..." />
+                <div className="carousel-item">
+                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                 </div>
               </div>
 

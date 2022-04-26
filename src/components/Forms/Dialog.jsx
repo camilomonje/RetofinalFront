@@ -62,7 +62,7 @@ export default function CustomizedDialogs({ children }) {
       <Button variant="outlined" onClick={handleClickOpen}>
         Reservar
       </Button>
-      <ShowReservations />
+
       <BootstrapDialog
         //onClose={handleClose}
         aria-labelledby="customized-dialog-title"
