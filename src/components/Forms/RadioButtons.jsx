@@ -31,32 +31,32 @@ export function RadioButtons() {
 
       <Grid container style={{marginLeft:"22px"}}>
         <Grid xs={4} item style={{padding:"10px"}}>
-        <FormControlLabel value="12:00-14:00" control={<Radio />} label="12:00-14:00" disabled={false} labelPlacement="bottom"  />
+        <FormControlLabel value="12:00" control={<Radio />} label="12:00" disabled={false} labelPlacement="bottom"  />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
-        <FormControlLabel value="14:00-16:00" control={<Radio />} label="14:00-16:00"  labelPlacement="bottom"  />
+        <FormControlLabel value="14:00" control={<Radio />} label="14:00"  labelPlacement="bottom"  />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
-        <FormControlLabel value="16:00-18:00" control={<Radio />} label="16:00-18:00"  labelPlacement="bottom"  />
+        <FormControlLabel value="16:00" control={<Radio />} label="16:00"  labelPlacement="bottom"  />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
         <FormControlLabel
-          value="18:00-20:00"
+          value="18:00"
           control={<Radio />}
-          label="18:00-20:00"
+          label="18:00"
           labelPlacement="bottom" 
         />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
         <FormControlLabel
-          value="20:00-22:00"
+          value="20:00"
           control={<Radio />}
-          label="20:00-22:00"
+          label="20:00"
           labelPlacement="bottom" 
         />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
-        <FormControlLabel value="22:00-24:00" control={<Radio />} label="22:00-24:00" disabled={false} labelPlacement="bottom"  />
+        <FormControlLabel value="22:00" control={<Radio />} label="22:00" disabled={false} labelPlacement="bottom"  />
         </Grid>
       </Grid>
       </RadioGroup>

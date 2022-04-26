@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const formatDate = (date)=>{
+    let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+     return formatted_date;
+    }
+
 export const formStateSlice = createSlice({
     name:'formState',
     initialState:{
@@ -9,7 +14,7 @@ export const formStateSlice = createSlice({
                 email:'',
                 nombre:'',
             },
-            dia: new Date().toString(),
+            dia: formatDate(new Date()),
             hora: '',
             mensaje:'',
         },
@@ -47,6 +52,7 @@ export const guardarId = (id) => (dispatch) => {
 }
 
 export const guardarDia = (dia) => (dispatch) => {
+    //let diaFormateado = formatDate(dia)
     dispatch(setDia(dia))
 }
 
