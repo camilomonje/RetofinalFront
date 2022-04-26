@@ -1,18 +1,41 @@
-import React from 'react'
+import React from "react"
 
-import { Card} from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { Card } from "@mui/material"
+import { LocalizationProvider } from "@mui/x-date-pickers"
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns"
 
-import {  InputField } from './InputField';
-import { FormStep, MultiStepForm } from './MultiStepForm';
-import { RadioButtons } from './RadioButtons';
-import { DateField } from './DateField';
-import { TextAreaField } from './TextAreaField';
+import { InputField } from "./InputField"
+import { FormStep, MultiStepForm } from "./MultiStepForm"
+import { RadioButtons } from "./RadioButtons"
+import { DateField } from "./DateField"
+import { TextAreaField } from "./TextAreaField"
 
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux"
 
+const ContainerForm = () => {
+  const { multiStepFormValue } = useSelector((state) => state.formState)
 
+  return (
+    <Card
+      variant="outlined"
+      style={{ maxWidth: 605, minHeight: 205, minWidth: 435, margin: "0 auto", padding: "20px 5px" }}
+    >
+      <div className="App">
+        <header className="App-header">
+          <MultiStepForm
+            initialValues={{
+              name: "",
+              email: "",
+              number: 0,
+              date: "",
+              hora: "",
+              pedido: "",
+            }}
+            onSubmit={(values) => {
+              alert(JSON.stringify(multiStepFormValue, null, 2))
+              console.log(multiStepFormValue)
+            }}
+=======
 const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
 
 
@@ -72,56 +95,32 @@ export const ContainerForm = () => {
             stepName='Date' 
             onSubmit={()=> console.log("Step 1 submit")}
           >
+            <FormStep stepName="Date" onSubmit={() => console.log("Step 1 submit")}>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateField 
-                  name='date' 
-                  label='Date'
-                />
+                <DateField name="date" label="Date" />
               </LocalizationProvider>
-          </FormStep>
+            </FormStep>
 
-          <FormStep 
-            stepName='Hora' 
-            onSubmit={()=> console.log("Step 2 submit")} 
-          >
-                <RadioButtons/>
-          </FormStep>
+            <FormStep stepName="Hora" onSubmit={() => console.log("Step 2 submit")}>
+              <RadioButtons />
+            </FormStep>
 
-          <FormStep 
-            stepName='Contacto' 
-            onSubmit={()=> console.log("Step 3 submit")} 
-          >
-            <InputField 
-                name='name' 
-                label='Nombre' 
-              />
+            <FormStep stepName="Contacto" onSubmit={() => console.log("Step 3 submit")}>
+              <InputField name="name" label="Nombre" />
 
-            <InputField 
-                name='number' 
-                label='Apellido' 
-              />
+              <InputField name="number" label="Apellido" />
 
-            <InputField 
-                name='email' 
-                label='Email'
-            />
+              <InputField name="email" label="Email" />
+            </FormStep>
 
-          
-          </FormStep>
-
-          <FormStep 
-            stepName='Pedido' 
-            onSubmit={()=> console.log("Step 4 submit")} 
-          >
-              <TextAreaField
-                name='pedido' 
-                label='Pedido'
-              />
-          </FormStep>
-
-        </MultiStepForm>
-      </header>
-    </div>
+            <FormStep stepName="Pedido" onSubmit={() => console.log("Step 4 submit")}>
+              <TextAreaField name="pedido" label="Pedido" />
+            </FormStep>
+          </MultiStepForm>
+        </header>
+      </div>
     </Card>
   )
 }
+
+export default ContainerForm

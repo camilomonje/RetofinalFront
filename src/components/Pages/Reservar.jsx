@@ -1,13 +1,12 @@
-import React from 'react';
-import { ContainerForm } from '../Forms/ContainerForm';
+import React from "react"
+import ContainerForm from "../Forms/ContainerForm"
 
 const Reservar = () => {
-    console.log('Aca taaaa');
-
-    return <div>
-        <h2>Reservar lugar</h2>
-        <ContainerForm />
+  return (
+    <div>
+      <ContainerForm />
     </div>
+  )
 }
 
-export default Reservar;
+export default Reservar
