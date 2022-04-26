@@ -5,6 +5,8 @@ import Footer from "./Footer"
 import Dialog from "../Forms/Dialog"
 import Reservar from "./Reservar"
 import ShowReservations from "../Buttons/ShowReservations"
+import Contact from "./ContactUs"
+import About from "./AboutUs"
 
 const Home = () => {
   return (
@@ -34,6 +36,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className="carrusel">
       <div className="container mt-5">
         <div className="row align-items-center">
           <div className="col-4">
@@ -42,12 +45,12 @@ const Home = () => {
                 <div className="carousel-item active">
                   <img src={imagenalmuerzo} className="d-block w-100" />
                   <div>
-                    <h5>Desayunos</h5>
-                    <p>Deliciosos desayunos</p>
+                    <h5 className="nombrescarrusel">Desayunos</h5>
+                    <p className="nombrescarrusel">Deliciosos desayunos</p>
                   </div>
                 </div>
-                <div class="carousel-item">
-                  <img src={imagenalmuerzo} class="d-block w-100" alt="..." />
+                <div className="carousel-item">
+                  <img src={imagenalmuerzo} className="d-block w-100" alt="..." />
                 </div>
               </div>
               <button
@@ -74,8 +77,8 @@ const Home = () => {
                 <div className="carousel-item active">
                   <img src={imagenalmuerzo} className="d-block w-100" />
                   <div>
-                    <h5>Almuerzos</h5>
-                    <p>Deliciosos almuerzos</p>
+                    <h5 className="nombrescarrusel">Almuerzos</h5>
+                    <p className="nombrescarrusel">Deliciosos almuerzos</p>
                   </div>
                 </div>
                 <div className="carousel-item">
@@ -107,8 +110,8 @@ const Home = () => {
                 <div className="carousel-item active">
                   <img src={imagenalmuerzo} className="d-block w-100" />
                   <div>
-                    <h5>Cenas</h5>
-                    <p>Deliciosas cenas</p>
+                    <h5 className="nombrescarrusel">Cenas</h5>
+                    <p className="nombrescarrusel">Deliciosas cenas</p>
                   </div>
                 </div>
                 <div className="carousel-item">
@@ -136,7 +139,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-
+      </div>
+      <About/>
+      <Contact/>
       <Footer />
     </div>
   )

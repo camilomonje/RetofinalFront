@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import "../src/components/Pages/estilos.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from './components/Pages/Home';
@@ -17,8 +18,8 @@ root.render(
       <Routes>
         <Route path="/" element={ <App /> }>
           **<Route index element={ <Home /> } />**
-          <Route path="nosotros" element={ <AboutUs /> } />
-          <Route path="contacto" element={ <ContactUs /> } />
+          {/* <Route path="nosotros" element={ <AboutUs /> } /> */}
+          {/* <Route path="contacto" element={ <ContactUs /> } /> */}
           <Route path="reservar" element={ <Reservar /> } />  
           <Route path="*" element={
             <p>
