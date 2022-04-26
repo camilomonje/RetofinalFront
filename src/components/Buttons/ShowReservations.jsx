@@ -1,5 +1,7 @@
 import { useState } from "react"
 import Button from "@mui/material/Button"
+import TextField from "@mui/material/TextField"
+import Box from "@mui/material/Box"
 
 const ShowReservations = () => {
   const [buscador, setBuscador] = useState(false)
@@ -32,27 +34,62 @@ const ShowReservations = () => {
 
       {buscador ? (
         <div>
+          <br />
           <label>Ingresa tu código de reserva</label>
-
-          <input
-            type="text"
-            placeholder="Código de reseva"
+          <br />
+          <TextField
+            label="Código de reseva"
+            variant="outlined"
             onChange={(e) => {
               setInput(e.target.value)
               setBusquedaRealizada(false)
+              setError("")
             }}
           />
           <br />
-          <button onClick={() => setBuscador(false)}>Cancelar</button>
-          <button onClick={search}>Buscar</button>
+          <Button variant="outlined" onClick={() => setBuscador(false)}>
+            Cancelar
+          </Button>
+          <Button variant="outlined" onClick={search}>
+            Buscar
+          </Button>
           {busquedaRealizada ? (
-            <div>
-              <h4>Reserva</h4>
-
-              <p>Dia de la reserva: {reserva.dia}</p>
-              <p>Hora de la reserva: {reserva.hora}</p>
-              <p>Pedido: {reserva.mensaje}</p>
-            </div>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "50ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <br />
+              <div>
+                <h4>Reserva</h4>
+                <TextField id="day-disabled" disabled label="Día de la reserva" defaultValue={reserva.dia} />
+                <TextField id="time-disabled" disabled label="Hora de la reserva" defaultValue={reserva.hora} />
+                <TextField
+                  id="customername-disabled"
+                  disabled
+                  label="Nombre del cliente"
+                  defaultValue={reserva.cliente.nombre}
+                />
+                <TextField
+                  id="customersurname-disabled"
+                  disabled
+                  label="Apellido del cliente"
+                  defaultValue={reserva.cliente.apellido}
+                />
+                <TextField
+                  id="customeremail-disabled"
+                  disabled
+                  label="Correo electrónico"
+                  defaultValue={reserva.cliente.email}
+                />
+                <TextField id="order-disabled" disabled label="Pedido" defaultValue={reserva.mensaje} />
+                <Button variant="outlined">Modificar pedido</Button>
+                <Button variant="outlined">Cancelar reserva</Button>
+              </div>
+            </Box>
           ) : (
             <></>
           )}
