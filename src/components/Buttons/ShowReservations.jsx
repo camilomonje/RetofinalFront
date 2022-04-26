@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack"
 const ShowReservations = () => {
   const [buscador, setBuscador] = useState(false)
   const [input, setInput] = useState("")
+  const [input2, setInput2] = useState("")
   const [reserva, setReserva] = useState([])
   const [busquedaRealizada, setBusquedaRealizada] = useState(false)
   const [error, setError] = useState("")
@@ -28,6 +29,42 @@ const ShowReservations = () => {
       .catch((error) => {
         setError(error)
       })
+  }
+
+  const modificarPedido = () => {
+    console.log("Aqui el nuevo pedido: " + input2)
+    fetch(baseUrl + endPoint, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cliente: {
+          apellido: "",
+          email: "",
+          nombre: "",
+        },
+        dia: "",
+        hora: "",
+        mensaje: "",
+        cantidadPersona: 0,
+        telefono: "",
+      }),
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  const cancelarModificacion = () => {
+    modificando(false)
+    setInput2("")
   }
   return (
     <div>
@@ -101,9 +138,21 @@ const ShowReservations = () => {
           {modificando ? (
             <div>
               <p>Modificando el pedido</p>
-              <TextField id="customersurname-disabled" label="Nuevo pedido" />
-              <Button variant="outlined">Guardar modificación</Button>
-              <Button variant="outlined">Cancelar modificación</Button>
+              <TextField
+                id="customersurname-disabled"
+                label="Nuevo pedido"
+                onChange={(e) => {
+                  setInput2(e.target.value)
+                  setBusquedaRealizada(false)
+                  setError("")
+                }}
+              />
+              <Button variant="outlined" onClick={() => modificarPedido()}>
+                Guardar modificación
+              </Button>
+              <Button variant="outlined" onClick={() => cancelarModificacion()}>
+                Cancelar modificación
+              </Button>
             </div>
           ) : (
             <></>
