@@ -9,6 +9,11 @@ import { guardarDia } from '../../store/slices/formState';
 
 export const DateField = ({label}) => {
   
+  const formatDate = (date)=>{
+    let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+     return formatted_date;
+    }
+
   const dispatchDia = useDispatch()
   const {multiStepFormValue} = useSelector( state => state.formState )
       return (<>
@@ -18,7 +23,8 @@ export const DateField = ({label}) => {
           label={label}
           value={multiStepFormValue.dia}
           onChange={(value) => {
-            dispatchDia(guardarDia(value.toString()))
+            let valueFormat = formatDate(value)
+            dispatchDia(guardarDia(valueFormat))
           }}
           renderInput={(params) => <TextField fullWidth style={{marginTop:"30px"}}
           {...params}

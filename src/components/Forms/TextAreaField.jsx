@@ -16,6 +16,7 @@ export const TextAreaField = ({label}) => {
         <>
         <Typography textAlign={'center'} style={{marginTop:"40px", padding:'5px 5px'}}>Escoja Un Dia</Typography>
       <TextField
+          required
           multiline={true}
           minRows={3}
           fullWidth 

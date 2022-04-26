@@ -10,14 +10,81 @@ import { RadioButtons } from './RadioButtons';
 import { DateField } from './DateField';
 import { TextAreaField } from './TextAreaField';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setId } from '../../store/slices/formState';
+
+
+const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
+
+
+
 
 
 
 export const ContainerForm = () => {
 
-    const {multiStepFormValue} = useSelector( state => state.formState )   
+    const {multiStepFormValue, id} = useSelector( state => state.formState )
+    const dispatchId = useDispatch()
  
+
+    
+    const formatDate = (date)=>{
+    let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+     return formatted_date;
+    }
+    
+    
+
+    const postReserva = () => {
+      fetch(`${baseURL}api/reserva`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cliente:{
+            apellido: '',
+            email: '',
+            nombre: '',
+          },
+          dia: multiStepFormValue.dia,
+          hora: multiStepFormValue.hora,
+          mensaje: '',
+        }),
+        
+      }).then(res => res.json())
+      .then(res => {
+        console.log(res.id)
+        dispatchId(setId(res.id))
+      })
+      ;
+    };
+
+    const putReserva = (id) => {
+      fetch(`${baseURL}api/reserva/${id}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cliente:{
+            apellido: multiStepFormValue.cliente.apellido,
+            email: multiStepFormValue.cliente.email,
+            nombre: multiStepFormValue.cliente.nombre,
+          },
+          dia: multiStepFormValue.dia,
+          hora: multiStepFormValue.hora,
+          mensaje: multiStepFormValue.mensaje,
+        }),
+        
+      }).then(res => res.json())
+      .then(res => console.log(res))
+      ;
+    };
+
+
   return (
     <Card variant="outlined" style={{maxWidth:605,minHeight:205 ,minWidth:435, margin:"0 auto", padding:'20px 5px'}}>
     <div className="App">
@@ -33,6 +100,8 @@ export const ContainerForm = () => {
           }}
           onSubmit={values => {
             alert(JSON.stringify(multiStepFormValue, null, 2));
+            
+            putReserva(id)
             console.log(multiStepFormValue)
           }}
         >
@@ -50,7 +119,10 @@ export const ContainerForm = () => {
 
           <FormStep 
             stepName='Hora' 
-            onSubmit={()=> console.log("Step 2 submit")} 
+            onSubmit={()=> {
+              postReserva()
+              console.log("Post reserva")
+            }} 
           >
                 <RadioButtons/>
           </FormStep>

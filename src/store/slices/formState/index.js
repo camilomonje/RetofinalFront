@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const formatDate = (date)=>{
+    let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+     return formatted_date;
+    }
+
 export const formStateSlice = createSlice({
     name:'formState',
     initialState:{
         multiStepFormValue:{
             cliente:{
-                apellido: 0,
+                apellido: '',
                 email:'',
                 nombre:'',
             },
-            dia: new Date().toString(),
+            dia: formatDate(new Date()),
             hora: '',
             mensaje:'',
-        }
+        },
+        id:''
     },
     reducers:{
         setDia:(state, action) => {
@@ -33,12 +39,20 @@ export const formStateSlice = createSlice({
         setPedido:(state, action) => {
             state.multiStepFormValue.mensaje = action.payload
         },
+        setId:(state, action) => {
+            state.id = action.payload
+        },
     }
 })
 
-export const {setDia, setHora, setName, setEmail, setNumber, setPedido} = formStateSlice.actions;
+export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId} = formStateSlice.actions;
+
+export const guardarId = (id) => (dispatch) => {
+    dispatch(setId(id))
+}
 
 export const guardarDia = (dia) => (dispatch) => {
+    //let diaFormateado = formatDate(dia)
     dispatch(setDia(dia))
 }
 
