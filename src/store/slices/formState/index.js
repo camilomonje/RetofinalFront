@@ -1,26 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const formatDate = (date)=>{
-    let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
-     return formatted_date;
-    }
+
+const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
+const formatDate = (string)=>{
+    let date = Date.parse(string)
+  let formatted_date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+   return formatted_date;
+  }
 
 export const formStateSlice = createSlice({
     name:'formState',
     initialState:{
         multiStepFormValue:{
+            cantidadPersonas: 0,
             cliente:{
                 apellido: '',
                 email:'',
                 nombre:'',
             },
-            dia: formatDate(new Date()),
+            dia: new Date().toString(),
             hora: '',
             mensaje:'',
+            telefono: 0
         },
         id:''
     },
     reducers:{
+        setCantidadPersonas:(state, action) => {
+            state.multiStepFormValue.cantidadPersonas = action.payload
+        },
+        setTelefono:(state, action) => {
+            state.multiStepFormValue.telefono = action.payload
+        },
         setDia:(state, action) => {
             state.multiStepFormValue.dia = action.payload
         },
@@ -45,14 +56,21 @@ export const formStateSlice = createSlice({
     }
 })
 
-export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId} = formStateSlice.actions;
+export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono} = formStateSlice.actions;
+
+export const guardarCantidadPersonas = (cantidadPersonas) => (dispatch) => {
+    dispatch(setCantidadPersonas(cantidadPersonas))
+}
+
+export const guardarTelefono = (telefono) => (dispatch) => {
+    dispatch(setTelefono(telefono))
+}
 
 export const guardarId = (id) => (dispatch) => {
     dispatch(setId(id))
 }
 
 export const guardarDia = (dia) => (dispatch) => {
-    //let diaFormateado = formatDate(dia)
     dispatch(setDia(dia))
 }
 
@@ -75,6 +93,30 @@ export const guardarNumero = (numero) => (dispatch) => {
 export const guardarPedido = (mensaje) => (dispatch) => {
     dispatch(setPedido(mensaje))
 }
+
+export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (dispatch) => {
+    fetch(`${baseURL}api/reserva`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        dia: formatDate(multiStepFormValue.dia),
+        hora: multiStepFormValue.hora
+      }),
+    }).then(res => {
+        res.json()
+        console.log(res)
+    })
+    .then(res => {
+    console.log("Post reserva" + formatDate(multiStepFormValue.dia) + multiStepFormValue.hora)
+
+      console.log(res)
+      dispatchId(setId(res.id))
+    }).catch(err => console(err))
+    ;
+  };
 
 
 

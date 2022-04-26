@@ -11,7 +11,8 @@ import { DateField } from './DateField';
 import { TextAreaField } from './TextAreaField';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setId } from '../../store/slices/formState';
+import { postReservaReducer, setId } from '../../store/slices/formState';
+import { InputPersonas } from './InputPersonas';
 
 
 const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
@@ -25,15 +26,16 @@ export const ContainerForm = () => {
 
     const {multiStepFormValue, id} = useSelector( state => state.formState )
     const dispatchId = useDispatch()
+    const dispatchPost = useDispatch()
  
-
+    const {dia} = multiStepFormValue;
     
-    const formatDate = (date)=>{
-    let formatted_date = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
+    const formatDate = (string)=>{
+      let date = new Date(string)
+    let formatted_date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
      return formatted_date;
     }
-    
-    
+    //let diaParseadito = formatDate(dia)
 
     const postReserva = () => {
       fetch(`${baseURL}api/reserva`, {
@@ -43,14 +45,8 @@ export const ContainerForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          cliente:{
-            apellido: '',
-            email: '',
-            nombre: '',
-          },
-          dia: multiStepFormValue.dia,
-          hora: multiStepFormValue.hora,
-          mensaje: '',
+          dia: formatDate(multiStepFormValue.dia),
+          hora: multiStepFormValue.hora
         }),
         
       }).then(res => res.json())
@@ -69,14 +65,16 @@ export const ContainerForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          cantidadPersonas: 0,
           cliente:{
             apellido: multiStepFormValue.cliente.apellido,
             email: multiStepFormValue.cliente.email,
             nombre: multiStepFormValue.cliente.nombre,
           },
-          dia: multiStepFormValue.dia,
+          dia: formatDate(multiStepFormValue.dia),
           hora: multiStepFormValue.hora,
           mensaje: multiStepFormValue.mensaje,
+          telefono: 0
         }),
         
       }).then(res => res.json())
@@ -94,7 +92,7 @@ export const ContainerForm = () => {
             name:'',
             email:'',
             number: 0,
-            date: '',
+            dia: '',
             hora: '',
             pedido:''
           }}
@@ -121,8 +119,8 @@ export const ContainerForm = () => {
             stepName='Hora' 
             onSubmit={()=> {
               postReserva()
-              console.log("Post reserva")
-            }} 
+              //dispatchPost(postReservaReducer(multiStepFormValue, dispatchId, setId))
+            }}
           >
                 <RadioButtons/>
           </FormStep>
@@ -146,6 +144,10 @@ export const ContainerForm = () => {
                 label='Email'
             />
 
+            <InputField 
+                name='telefono' 
+                label='Telefono'
+            />
           
           </FormStep>
 
@@ -153,6 +155,11 @@ export const ContainerForm = () => {
             stepName='Pedido' 
             onSubmit={()=> console.log("Step 4 submit")} 
           >
+              <InputPersonas
+                name='personas' 
+                label='Cantidad Personas'
+              />
+
               <TextAreaField
                 name='pedido' 
                 label='Pedido'
