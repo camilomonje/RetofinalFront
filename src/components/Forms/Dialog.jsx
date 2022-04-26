@@ -62,7 +62,11 @@ export default function CustomizedDialogs({ children }) {
       <Button variant="outlined" onClick={handleClickOpen}>
         Reservar
       </Button>
+
       <br />
+
+
+      <ShowReservations />
 
       <BootstrapDialog
         //onClose={handleClose}
@@ -76,4 +80,8 @@ export default function CustomizedDialogs({ children }) {
       </BootstrapDialog>
     </div>
   )
+
 }
+
+}
+

@@ -22,6 +22,11 @@ export function RadioButtons() {
       <FormLabel style={{ margin: "10px auto", padding: "20px 5px" }} id="demo-row-radio-buttons-group-label">
         Escoje una hora
       </FormLabel>
+
+    return (
+    <FormControl required={true} variant='filled' >
+      <FormLabel  style={{margin:"10px auto", padding:'20px 5px'}} id="demo-row-radio-buttons-group-label">Escoja Un horario</FormLabel>
+
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"

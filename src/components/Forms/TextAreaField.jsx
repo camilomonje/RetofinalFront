@@ -16,12 +16,22 @@ export const TextAreaField = ({ label }) => {
         Escribe tu pedido
       </Typography>
       <TextField
+
         multiline={true}
         minRows={3}
         fullWidth
         label={label}
         onChange={handleChange}
         style={{ marginTop: 30 }}
+
+          required
+          multiline={true}
+          minRows={3}
+          fullWidth 
+          label={label}
+          onChange={handleChange}
+          style={{marginTop:30}}
+
       />
     </>
   )
