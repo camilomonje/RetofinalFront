@@ -10,7 +10,8 @@ import { RadioButtons } from './RadioButtons';
 import { DateField } from './DateField';
 import { TextAreaField } from './TextAreaField';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setId } from '../../store/slices/formState';
 
 
 const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
@@ -22,11 +23,38 @@ const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
 
 export const ContainerForm = () => {
 
-    const {multiStepFormValue} = useSelector( state => state.formState )   
+    const {multiStepFormValue, id} = useSelector( state => state.formState )
+    const dispatchId = useDispatch()
  
     const postReserva = () => {
       fetch(`${baseURL}api/reserva`, {
         method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cliente:{
+            apellido: '',
+            email: '',
+            nombre: '',
+          },
+          dia: multiStepFormValue.dia,
+          hora: multiStepFormValue.hora,
+          mensaje: '',
+        }),
+        
+      }).then(res => res.json())
+      .then(res => {
+        console.log(res.id)
+        dispatchId(setId(res.id))
+      })
+      ;
+    };
+
+    const putReserva = (id) => {
+      fetch(`${baseURL}api/reserva/${id}`, {
+        method: "PUT",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -44,7 +72,6 @@ export const ContainerForm = () => {
         
       }).then(res => res.json())
       .then(res => console.log(res))
-      
       ;
     };
 
@@ -64,7 +91,8 @@ export const ContainerForm = () => {
           }}
           onSubmit={values => {
             alert(JSON.stringify(multiStepFormValue, null, 2));
-            postReserva()
+            
+            putReserva(id)
             console.log(multiStepFormValue)
           }}
         >
@@ -82,7 +110,10 @@ export const ContainerForm = () => {
 
           <FormStep 
             stepName='Hora' 
-            onSubmit={()=> console.log("Step 2 submit")} 
+            onSubmit={()=> {
+              postReserva()
+              console.log("Post reserva")
+            }} 
           >
                 <RadioButtons/>
           </FormStep>

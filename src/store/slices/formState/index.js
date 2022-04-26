@@ -12,7 +12,8 @@ export const formStateSlice = createSlice({
             dia: new Date().toString(),
             hora: '',
             mensaje:'',
-        }
+        },
+        id:''
     },
     reducers:{
         setDia:(state, action) => {
@@ -33,10 +34,17 @@ export const formStateSlice = createSlice({
         setPedido:(state, action) => {
             state.multiStepFormValue.mensaje = action.payload
         },
+        setId:(state, action) => {
+            state.id = action.payload
+        },
     }
 })
 
-export const {setDia, setHora, setName, setEmail, setNumber, setPedido} = formStateSlice.actions;
+export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId} = formStateSlice.actions;
+
+export const guardarId = (id) => (dispatch) => {
+    dispatch(setId(id))
+}
 
 export const guardarDia = (dia) => (dispatch) => {
     dispatch(setDia(dia))
