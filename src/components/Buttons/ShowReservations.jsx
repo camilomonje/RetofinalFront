@@ -40,16 +40,16 @@ const ShowReservations = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        cantidadPersonas: reserva.cantidadPersonas,
         cliente: {
-          apellido: "",
-          email: "",
-          nombre: "",
+          apellido: reserva.cliente.apellido,
+          email: reserva.cliente.email,
+          nombre: reserva.cliente.nombre,
         },
-        dia: "",
-        hora: "",
-        mensaje: "",
-        cantidadPersona: 0,
-        telefono: "",
+        dia: reserva.dia,
+        hora: reserva.hora,
+        mensaje: input2,
+        telefono: reserva.telefono,
       }),
     })
       .then((response) => {
