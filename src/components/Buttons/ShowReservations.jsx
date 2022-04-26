@@ -2,13 +2,17 @@ import { useState } from "react"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
 import Box from "@mui/material/Box"
+import Alert from "@mui/material/Alert"
+import Stack from "@mui/material/Stack"
 
 const ShowReservations = () => {
   const [buscador, setBuscador] = useState(false)
   const [input, setInput] = useState("")
+  const [input2, setInput2] = useState("")
   const [reserva, setReserva] = useState([])
   const [busquedaRealizada, setBusquedaRealizada] = useState(false)
   const [error, setError] = useState("")
+  const [modificando, setModificando] = useState(false)
 
   const baseUrl = `${process.env.REACT_APP_API_URL}/`
   const endPoint = `${input}`
@@ -25,6 +29,42 @@ const ShowReservations = () => {
       .catch((error) => {
         setError(error)
       })
+  }
+
+  const modificarPedido = () => {
+    console.log("Aqui el nuevo pedido: " + input2)
+    fetch(baseUrl + endPoint, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cantidadPersonas: reserva.cantidadPersonas,
+        cliente: {
+          apellido: reserva.cliente.apellido,
+          email: reserva.cliente.email,
+          nombre: reserva.cliente.nombre,
+        },
+        dia: reserva.dia,
+        hora: reserva.hora,
+        mensaje: input2,
+        telefono: reserva.telefono,
+      }),
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+  const cancelarModificacion = () => {
+    modificando(false)
+    setInput2("")
   }
   return (
     <div>
@@ -86,15 +126,45 @@ const ShowReservations = () => {
                   defaultValue={reserva.cliente.email}
                 />
                 <TextField id="order-disabled" disabled label="Pedido" defaultValue={reserva.mensaje} />
-                <Button variant="outlined">Modificar pedido</Button>
+                <Button variant="outlined" onClick={() => setModificando(true)}>
+                  Modificar pedido
+                </Button>
                 <Button variant="outlined">Cancelar reserva</Button>
               </div>
             </Box>
           ) : (
             <></>
           )}
+          {modificando ? (
+            <div>
+              <p>Modificando el pedido</p>
+              <TextField
+                id="customersurname-disabled"
+                label="Nuevo pedido"
+                onChange={(e) => {
+                  setInput2(e.target.value)
+                  setBusquedaRealizada(false)
+                  setError("")
+                }}
+              />
+              <Button variant="outlined" onClick={() => modificarPedido()}>
+                Guardar modificación
+              </Button>
+              <Button variant="outlined" onClick={() => cancelarModificacion()}>
+                Cancelar modificación
+              </Button>
+            </div>
+          ) : (
+            <></>
+          )}
 
-          {error ? <p>No hay reservaciones con este codigo</p> : <></>}
+          {error ? (
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert severity="error">No hay reservaciones con este código</Alert>
+            </Stack>
+          ) : (
+            <></>
+          )}
         </div>
       ) : (
         <></>
