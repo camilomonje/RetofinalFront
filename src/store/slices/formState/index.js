@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 
 const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
@@ -111,6 +112,7 @@ export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (di
       }),
     }).then(res => {
         res.json()
+        console.log(res.json())
         console.log(res)
     })
     .then(res => {
@@ -126,17 +128,14 @@ export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (di
   export const getReservasPorDia = (dia) => (dispatch) => {
     const diaActualizado = dia.replace("/","%2F")
     const diaActualizado2 = diaActualizado.replace("/","%2F")
-    fetch(`${baseURL}api/reserva/findByDia/${diaActualizado2}`, {
-    }).then(res => {
-        console.log(res)
-        console.log(res.json())
-    })
-    .then(res => {
-        console.log(res)
-        dispatch(setBuscarReservasDelDia(res))
-    }).catch(err => console(err))
-    ;
-  };
+    axios.get(`${baseURL}api/reserva/findByDia/${diaActualizado2}`).then(res => 
+{
+
+//console.log(res.data)
+dispatch(setBuscarReservasDelDia(res.data))
+   }); 
+
+};
 
 
 export default formStateSlice.reducer;

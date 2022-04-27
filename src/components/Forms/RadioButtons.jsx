@@ -9,23 +9,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { guardarHora } from '../../store/slices/formState';
 import { Grid } from '@mui/material';
 
+
 export function RadioButtons() {
   
     const dispatchHora = useDispatch()
-    const {multiStepFormValue} = useSelector( state => state.formState )
+    const {multiStepFormValue, reservasDelDia} = useSelector( state => state.formState )
     
     const radioGroupHandle = (e) => {
         dispatchHora(guardarHora(e.target.value))
     }
 
-    const disable = [
-      '12:00',
-      '14:00',
-      '16:00',
-      '18:00',
-      '20:00',
-      '22:00',
-    ]
+  
 
     let jsonDisable = {
       medioDia: false,
@@ -36,8 +30,9 @@ export function RadioButtons() {
       dies: false,
     }
 
-    for(let i = 0 ; i< disable.length ; i++){
-      switch(disable[i]){
+    for(let i = 0 ; i< reservasDelDia.length ; i++){
+      console.log(jsonDisable)
+      switch(reservasDelDia[i]){
         case '12:00': jsonDisable.medioDia = true;
           break;
         case '14:00': jsonDisable.dos = true;
@@ -52,6 +47,9 @@ export function RadioButtons() {
           break;
       }
     }
+
+    
+    
 
     return (
     <FormControl required={true} variant='filled' >
@@ -69,10 +67,10 @@ export function RadioButtons() {
         <FormControlLabel value="12:00" control={<Radio />} label="12:00" disabled={jsonDisable.medioDia ? true : false} labelPlacement="bottom"  />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
-        <FormControlLabel value="14:00" control={<Radio />} label="14:00"  labelPlacement="bottom"  />
+        <FormControlLabel value="14:00" control={<Radio />} label="14:00"  labelPlacement="bottom" disabled={jsonDisable.dos ? true : false}  />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
-        <FormControlLabel value="16:00" control={<Radio />} label="16:00"  labelPlacement="bottom"  />
+        <FormControlLabel value="16:00" control={<Radio />} label="16:00"  labelPlacement="bottom" disabled={jsonDisable.cuatro ? true : false} />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
         <FormControlLabel
@@ -80,6 +78,7 @@ export function RadioButtons() {
           control={<Radio />}
           label="18:00"
           labelPlacement="bottom" 
+          disabled={jsonDisable.seis ? true : false}
         />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
@@ -88,10 +87,11 @@ export function RadioButtons() {
           control={<Radio />}
           label="20:00"
           labelPlacement="bottom" 
+          disabled={jsonDisable.ocho ? true : false}
         />
         </Grid>
         <Grid xs={4} item  style={{padding:"10px"}}>
-        <FormControlLabel value="22:00" control={<Radio />} label="22:00" disabled={false} labelPlacement="bottom"  />
+        <FormControlLabel value="22:00" control={<Radio />} label="22:00" labelPlacement="bottom" disabled={jsonDisable.dies ? true : false} />
         </Grid>
       </Grid>
       </RadioGroup>
@@ -100,21 +100,3 @@ export function RadioButtons() {
 }
 
 
-/*
-<FormControlLabel value="12:00-14:00" control={<Radio />} label="12:00-14:00" disabled={false} labelPlacement="bottom"  />
-        <FormControlLabel value="14:00-16:00" control={<Radio />} label="14:00-16:00"  labelPlacement="bottom"  />
-        <FormControlLabel value="16:00-18:00" control={<Radio />} label="16:00-18:00"  labelPlacement="bottom"  />
-        <FormControlLabel
-          value="18:00-20:00"
-          control={<Radio />}
-          label="18:00-20:00"
-          labelPlacement="bottom" 
-        />
-        <FormControlLabel
-          value="20:00-22:00"
-          control={<Radio />}
-          label="20:00-22:00"
-          labelPlacement="bottom" 
-        />
-
-*/
