@@ -71,6 +71,32 @@ export const ContainerForm = ({ onClose }) => {
       .then((res) => console.log(res))
   }
 
+  const postEmailError = () => {
+    fetch(`${baseUrl}/sendEmailError`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cantidadPersonas: multiStepFormValue.cantidadPersonas,
+        cliente: {
+          apellido: multiStepFormValue.cliente.apellido,
+          email: multiStepFormValue.cliente.email,
+          nombre: multiStepFormValue.cliente.nombre,
+        },
+        dia: formatDate(multiStepFormValue.dia),
+        hora: multiStepFormValue.hora,
+        id: id,
+        mensaje: multiStepFormValue.mensaje,
+        telefono: multiStepFormValue.telefono,
+      }),
+    })
+      .then((res) => res)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  }
+
   const postEmail = () => {
     fetch(`${baseUrl}/sendEmail`, {
       method: "POST",
@@ -114,11 +140,19 @@ export const ContainerForm = ({ onClose }) => {
               pedido: "",
             }}
             onSubmit={(values) => {
-              console.log(values)
+              if(multiStepFormValue.hora === '08:00'){
+                postEmailError()
+                onClose()
+                dispatchSetInitialState(setInitialState())
+              }else{
+                console.log(values)
+                console.log("else")
               putReserva(id)
               postEmail()
               onClose()
               dispatchSetInitialState(setInitialState())
+              }
+              
             }}
           >
             <FormStep
