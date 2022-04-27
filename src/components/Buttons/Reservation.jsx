@@ -6,7 +6,7 @@ import Box from "@mui/material/Box"
 import Alert from "@mui/material/Alert"
 import Stack from "@mui/material/Stack"
 
-export const Reservation = () => {
+export const Reservation = (props) => {
   const [buscador, setBuscador] = useState(false)
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
@@ -65,6 +65,8 @@ export const Reservation = () => {
       .catch((error) => {
         console.error(error)
       })
+
+    props.onClose()
   }
   const postEmail = () => {
     fetch(`${baseUrl}sendEmailModification`, {
@@ -130,7 +132,9 @@ export const Reservation = () => {
     if (dateReserva - dateActual > 7200000) {
       modificarPedido()
       postEmail()
+      props.onClose()
     } else {
+      props.onClose()
       alert("Fuera de rango de hora para modificar la reserva, comuniquese con el administrador del restaurante")
     }
   }

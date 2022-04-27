@@ -3,10 +3,7 @@ import imagenlogo from "../../assets/img/Foodka.jpg"
 import imagenalmuerzo from "../../assets/img/almuerzo1.jpg"
 import Footer from "./Footer"
 import Dialog from "../Forms/Dialog"
-import Reservar from "./Reservar"
-import ShowReservations from "../Buttons/ShowReservations"
 import DialogButtons from "../Buttons/DialogButtons"
-import { Reservation } from "../Buttons/Reservation"
 
 const Home = () => {
   return (
@@ -29,10 +26,8 @@ const Home = () => {
             <div className="card-body">
               <h5 className="card-title">Mis reservas</h5>
               <p className="card-text">¡Busca aquí tus reservas pendientes!</p>
-              
-              <DialogButtons >
-                <Reservation />
-              </DialogButtons>
+
+              <DialogButtons />
             </div>
           </div>
         </div>
