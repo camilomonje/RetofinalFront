@@ -19,7 +19,7 @@ export const formStateSlice = createSlice({
                 nombre: '',
             },
             dia: new Date().toString(),
-            hora: '',
+            hora: '08:00',
             mensaje: '',
             telefono: 0
         },
@@ -68,7 +68,7 @@ export const setInitialState = () => (dispatch) => {
     dispatch(setEmail(''))//Set email
     dispatch(setName(''))
     dispatch(setDia(new Date().toString()))
-    dispatch(setHora(''))
+    dispatch(setHora('08:00'))
     dispatch(setPedido(''))
     dispatch(setTelefono(0))
     dispatch(setId(''))
