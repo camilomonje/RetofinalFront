@@ -115,11 +115,11 @@ export const ContainerForm = () => {
             pedido:''
           }}
           onSubmit={values => {
-            alert(JSON.stringify(multiStepFormValue, null, 2));
+            //alert(JSON.stringify(multiStepFormValue, null, 2));
             
             putReserva(id)
             postEmail()
-            console.log(multiStepFormValue)
+            //console.log(multiStepFormValue)
           }}
         >
           <FormStep 
