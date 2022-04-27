@@ -16,6 +16,7 @@ export const DateField = ({label}) => {
         
         <Typography textAlign={'center'} style={{marginTop:"40px", padding:'5px 5px'}}>Escoja Un Dia</Typography>
         <DatePicker
+        
           label={label}
           value={multiStepFormValue.dia}
           onChange={(value) => {
