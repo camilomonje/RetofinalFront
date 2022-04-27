@@ -5,6 +5,8 @@ import Footer from "./Footer"
 import Dialog from "../Forms/Dialog"
 import Reservar from "./Reservar"
 import ShowReservations from "../Buttons/ShowReservations"
+import DialogButtons from "../Buttons/DialogButtons"
+import { Reservation } from "../Buttons/Reservation"
 
 const Home = () => {
   return (
@@ -29,7 +31,10 @@ const Home = () => {
             <div className="card-body">
               <h5 className="card-title">Mis reservas</h5>
               <p className="card-text">¡Busca aquí tus reservas pendientes!</p>
-              <ShowReservations />
+              
+              <DialogButtons >
+                <Reservation />
+              </DialogButtons>
             </div>
           </div>
         </div>
