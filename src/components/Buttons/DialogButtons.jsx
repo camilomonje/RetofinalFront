@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle"
 import DialogContent from "@mui/material/DialogContent"
 import IconButton from "@mui/material/IconButton"
 import CloseIcon from "@mui/icons-material/Close"
-import ShowReservations from "../Buttons/ShowReservations"
+import { Reservation } from "../Buttons/Reservation"
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -59,7 +59,6 @@ export default function DialogButtons({ children }) {
 
   return (
     <div>
-        
       <Button variant="outlined" onClick={handleClickOpen}>
         Mis reservas
       </Button>
@@ -68,7 +67,9 @@ export default function DialogButtons({ children }) {
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Busca tu reserva
         </BootstrapDialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
+        <DialogContent dividers>
+          <Reservation onClose={handleClose} />
+        </DialogContent>
       </BootstrapDialog>
     </div>
   )
