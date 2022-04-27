@@ -69,6 +69,16 @@ export const Reservation = () => {
     
   }
 
+  /* const validarTiempo = () => {
+    let dateActual = new Date();
+    let dateReserva = new Date(
+        reserva.dia
+        .split("/")[dia.reserva[2], dia.reserva[0], dia.reserva[1]]
+        .map(d => d.length == 1 ? '0' + d : d)
+        .join('-') + 'T' + reserva.hora + ':00.000Z'
+      );
+  };  */
+
   const cancelarReserva = () =>{
     console.log('Prueba delete', baseUrl + endPoint);
 
