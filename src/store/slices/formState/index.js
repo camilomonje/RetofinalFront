@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 
 const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
@@ -12,7 +13,7 @@ export const formStateSlice = createSlice({
     name:'formState',
     initialState:{
         multiStepFormValue:{
-            cantidadPersonas: 0,
+            cantidadPersonas: 1,
             cliente:{
                 apellido: '',
                 email:'',
@@ -23,9 +24,13 @@ export const formStateSlice = createSlice({
             mensaje:'',
             telefono: 0
         },
-        id:''
+        id:'',
+        reservasDelDia: [],
     },
     reducers:{
+        setBuscarReservasDelDia:(state, action) => {
+            state.reservasDelDia = action.payload
+        },
         setCantidadPersonas:(state, action) => {
             state.multiStepFormValue.cantidadPersonas = action.payload
         },
@@ -56,7 +61,7 @@ export const formStateSlice = createSlice({
     }
 })
 
-export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono} = formStateSlice.actions;
+export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia} = formStateSlice.actions;
 
 export const guardarCantidadPersonas = (cantidadPersonas) => (dispatch) => {
     dispatch(setCantidadPersonas(cantidadPersonas))
@@ -107,6 +112,7 @@ export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (di
       }),
     }).then(res => {
         res.json()
+        console.log(res.json())
         console.log(res)
     })
     .then(res => {
@@ -118,6 +124,18 @@ export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (di
     ;
   };
 
+
+  export const getReservasPorDia = (dia) => (dispatch) => {
+    const diaActualizado = dia.replace("/","%2F")
+    const diaActualizado2 = diaActualizado.replace("/","%2F")
+    axios.get(`${baseURL}api/reserva/findByDia/${diaActualizado2}`).then(res => 
+{
+
+//console.log(res.data)
+dispatch(setBuscarReservasDelDia(res.data))
+   }); 
+
+};
 
 
 export default formStateSlice.reducer;

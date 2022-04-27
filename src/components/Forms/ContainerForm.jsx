@@ -11,7 +11,7 @@ import { DateField } from './DateField';
 import { TextAreaField } from './TextAreaField';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { postReservaReducer, setId } from '../../store/slices/formState';
+import { getReservasPorDia, postReservaReducer, setId } from '../../store/slices/formState';
 import { InputPersonas } from './InputPersonas';
 
 
@@ -23,12 +23,12 @@ export const ContainerForm = () => {
 
     const {multiStepFormValue, id} = useSelector( state => state.formState )
     const dispatchId = useDispatch()
-    const dispatchPost = useDispatch()
+    const dispatchGet = useDispatch()
 
     
     const formatDate = (string)=>{
       let date = new Date(string)
-    let formatted_date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    let formatted_date = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()
      return formatted_date;
     }
 
@@ -115,16 +115,16 @@ export const ContainerForm = () => {
             pedido:''
           }}
           onSubmit={values => {
-            alert(JSON.stringify(multiStepFormValue, null, 2));
+            //alert(JSON.stringify(multiStepFormValue, null, 2));
             
             putReserva(id)
             postEmail()
-            console.log(multiStepFormValue)
+            //console.log(multiStepFormValue)
           }}
         >
           <FormStep 
             stepName='Date' 
-            onSubmit={()=> console.log("Step 1 submit")}
+            onSubmit={()=> dispatchGet(getReservasPorDia(formatDate(multiStepFormValue.dia)))}
           >
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateField 

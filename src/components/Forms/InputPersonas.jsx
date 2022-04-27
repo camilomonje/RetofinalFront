@@ -24,18 +24,3 @@ export const InputPersonas = ({label}) => {
         </Box>
     )
 }
-
-
-/*
-<TextField
-        type="range"
-        min='1'
-        max='10'
-        fullWidth 
-        label={label}
-        onChange={handleChange}
-        style={{marginTop:30}}
-        required
-    />
-
-*/
