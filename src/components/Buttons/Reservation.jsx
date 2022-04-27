@@ -37,6 +37,8 @@ export const Reservation = () => {
     postEmail()
   }
 
+
+
   const modificarPedido = () => {
     fetch(baseUrl + endPoint, {
       method: "PUT",
@@ -96,6 +98,93 @@ export const Reservation = () => {
     modificando(false)
     setInput2("")
   }
+
+  const enviarEmailCancelar = () => {
+    fetch(`${baseUrl}sendEmailDelete`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },  
+      body: JSON.stringify({
+        cantidadPersonas: reserva.cantidadPersonas,
+        cliente: {
+          apellido: reserva.cliente.apellido,
+          email: reserva.cliente.email,
+          nombre: reserva.cliente.nombre,
+        },
+        dia: reserva.dia,
+        hora: reserva.hora,
+        mensaje: input2,
+        telefono: reserva.telefono,
+      }),
+    })
+      .then((res) => res)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  }
+
+  console.log(reserva);
+
+  const validarTiempo = async () => {
+    console.log("entre a validar", reserva.dia);
+     
+    let diaSplit = reserva.dia.split("/") 
+    let dateActual = new Date();
+    let dateReserva = new Date(
+        [diaSplit[2], diaSplit[0], diaSplit[1]]
+        .map(d => d.length == 1 ? '0' + d : d)
+        .join('-') + 'T' + reserva.hora 
+      );
+
+      console.log(dateActual,dateReserva);
+      console.log(reserva.hora);
+      if ((dateReserva - dateActual) > 7200000) {
+        cancelarReserva();
+        enviarEmailCancelar();
+      } else {
+        alert("Fuera de rango de hora para cancelar, comuniquese con el administrador del restaurante");
+      }
+  }; 
+
+  const cancelarReserva = () =>{
+    
+    console.log('Prueba delete', baseUrl + endPoint);
+
+    if (confirm("¿Esta seguro de querer cancelar su reserva?"))
+    {
+      fetch(baseUrl + endPoint, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+        cantidadPersonas: reserva.cantidadPersonas,
+        cliente: {
+          apellido: reserva.cliente.apellido,
+          email: reserva.cliente.email,
+          nombre: reserva.cliente.nombre,
+        },
+        dia: reserva.dia,
+        hora: reserva.hora,
+        mensaje: input2,
+        telefono: reserva.telefono,
+      }),
+      })
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        console.log(data);
+        alert("Cancelación exitosa");
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    }
+  }
+
 
   return (
     <div>
@@ -163,7 +252,7 @@ export const Reservation = () => {
             <Button variant="outlined" onClick={() => setModificando(true)}>
               Modificar reserva
             </Button>
-            <Button variant="outlined">Cancelar reserva</Button>
+            <Button id="idcancelarReserva"variant="outlined" onClick={() => validarTiempo()} >Cancelar reserva</Button>
           </div>
         </Box>
       ) : (
