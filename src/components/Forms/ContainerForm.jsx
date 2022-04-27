@@ -11,7 +11,7 @@ import { DateField } from './DateField';
 import { TextAreaField } from './TextAreaField';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { getReservasPorDia, postReservaReducer, setId } from '../../store/slices/formState';
+import { getReservasPorDia, postReservaReducer, setId, setInitialState } from '../../store/slices/formState';
 import { InputPersonas } from './InputPersonas';
 
 
@@ -24,7 +24,7 @@ export const ContainerForm = ({onClose}) => {
     const {multiStepFormValue, id} = useSelector( state => state.formState )
     const dispatchId = useDispatch()
     const dispatchGet = useDispatch()
-
+    const dispatchSetInitialState = useDispatch()
     
     const formatDate = (string)=>{
       let date = new Date(string)
@@ -118,6 +118,7 @@ export const ContainerForm = ({onClose}) => {
             putReserva(id)
             postEmail()
             onClose()
+            dispatchSetInitialState(setInitialState())
           }}
         >
           <FormStep 

@@ -20,7 +20,7 @@ export const formStateSlice = createSlice({
                 nombre:'',
             },
             dia: new Date().toString(),
-            hora: '12:00',
+            hora: '',
             mensaje:'',
             telefono: 0
         },
@@ -63,7 +63,18 @@ export const formStateSlice = createSlice({
 
 export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia} = formStateSlice.actions;
 
-
+export const setInitialState = () => (dispatch) => {
+    dispatch(setCantidadPersonas(1))//Set personas
+    dispatch(setNumber(''))//Set apellido
+    dispatch(setEmail(''))//Set email
+    dispatch(setName(''))
+    dispatch(setDia(new Date().toString()))
+    dispatch(setHora(''))
+    dispatch(setPedido(''))
+    dispatch(setTelefono(0))
+    dispatch(setId(''))
+    dispatch(setBuscarReservasDelDia([]))
+}
 
 export const guardarCantidadPersonas = (cantidadPersonas) => (dispatch) => {
     dispatch(setCantidadPersonas(cantidadPersonas))
