@@ -67,6 +67,32 @@ export const Reservation = () => {
   const cancelarModificacion = () => {
     modificando(false)
     setInput2("")
+    
+  }
+
+  const cancelarReserva = () =>{
+    console.log('Prueba delete', baseUrl + endPoint);
+
+    if (confirm("¿Esta seguro de querer cancelar su reserva?"))
+    {
+      fetch(baseUrl + endPoint, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }
+      })
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        console.log(data);
+        alert("Cancelación exitosa");
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    }
   }
 
   return (
@@ -101,7 +127,7 @@ export const Reservation = () => {
             >
               <br />
               <div>
-                <h4>Reserva</h4>
+                <h4>Mis Reservas</h4>
                 <TextField id="day-disabled" disabled label="Día de la reserva" defaultValue={reserva.dia} />
                 <TextField id="time-disabled" disabled label="Hora de la reserva" defaultValue={reserva.hora} />
                 <TextField
@@ -126,7 +152,7 @@ export const Reservation = () => {
                 <Button variant="outlined" onClick={() => setModificando(true)}>
                   Modificar pedido
                 </Button>
-                <Button variant="outlined">Cancelar reserva</Button>
+                <Button id="idcancelarReserva"variant="outlined" onClick={() => cancelarReserva()} >Cancelar reserva</Button>
               </div>
             </Box>
           ) : (
