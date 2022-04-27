@@ -12,7 +12,7 @@ export const formStateSlice = createSlice({
     name:'formState',
     initialState:{
         multiStepFormValue:{
-            cantidadPersonas: 0,
+            cantidadPersonas: 1,
             cliente:{
                 apellido: '',
                 email:'',

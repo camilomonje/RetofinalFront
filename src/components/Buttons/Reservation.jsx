@@ -71,6 +71,7 @@ export const Reservation = () => {
 
   return (
     <div>
+        <Box style={{margin:"10px auto", padding:'25px 25px'}}>
           <br />
           <label>Ingresa tu código de reserva</label>
           <br />
@@ -162,6 +163,7 @@ export const Reservation = () => {
           ) : (
             <></>
           )}
+          </Box>
         </div>
   )
 }
