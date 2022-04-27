@@ -13,7 +13,7 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import Reservar from "../Pages/Reservar"
 
-const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
+const baseUrl = `${process.env.REACT_APP_API_URL}`
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -24,24 +24,22 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }))
 
-
 const borrarReserva = (id) => {
-  axios.delete(`${baseURL}api/reserva/${id}`) 
+  axios.delete(`${baseUrl}/${id}`)
 }
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props
-  const {id } = useSelector( state => state.formState )
+  const { id } = useSelector((state) => state.formState)
   const dispatchCloseForm = useDispatch()
 
-  
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
           aria-label="close"
-          onClick={()=>{
+          onClick={() => {
             onClose()
             borrarReserva(id)
           }}
@@ -89,9 +87,7 @@ export default function CustomizedDialogs() {
           Cree su reservar
         </BootstrapDialogTitle>
         <DialogContent dividers>
-      
-          <Reservar onClose={handleClose}/>
-
+          <Reservar onClose={handleClose} />
         </DialogContent>
       </BootstrapDialog>
     </div>

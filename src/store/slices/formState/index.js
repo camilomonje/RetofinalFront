@@ -1,67 +1,66 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
-const formatDate = (string)=>{
+const baseUrl = `${process.env.REACT_APP_API_URL}`
+const formatDate = (string) => {
     let date = Date.parse(string)
-  let formatted_date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
-   return formatted_date;
-  }
+    let formatted_date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+    return formatted_date;
+}
 
 export const formStateSlice = createSlice({
-    name:'formState',
-    initialState:{
-        multiStepFormValue:{
+    name: 'formState',
+    initialState: {
+        multiStepFormValue: {
             cantidadPersonas: 1,
-            cliente:{
+            cliente: {
                 apellido: '',
-                email:'',
-                nombre:'',
+                email: '',
+                nombre: '',
             },
             dia: new Date().toString(),
             hora: '',
-            mensaje:'',
+            mensaje: '',
             telefono: 0
         },
-        id:'',
+        id: '',
         reservasDelDia: [],
     },
-    reducers:{
-        setBuscarReservasDelDia:(state, action) => {
+    reducers: {
+        setBuscarReservasDelDia: (state, action) => {
             state.reservasDelDia = action.payload
         },
-        setCantidadPersonas:(state, action) => {
+        setCantidadPersonas: (state, action) => {
             state.multiStepFormValue.cantidadPersonas = action.payload
         },
-        setTelefono:(state, action) => {
+        setTelefono: (state, action) => {
             state.multiStepFormValue.telefono = action.payload
         },
-        setDia:(state, action) => {
+        setDia: (state, action) => {
             state.multiStepFormValue.dia = action.payload
         },
-        setHora:(state, action) => {
-            state.multiStepFormValue.hora = action.payload 
+        setHora: (state, action) => {
+            state.multiStepFormValue.hora = action.payload
         },
-        setName:(state, action) => {
+        setName: (state, action) => {
             state.multiStepFormValue.cliente.nombre = action.payload
         },
-        setEmail:(state, action) => {
+        setEmail: (state, action) => {
             state.multiStepFormValue.cliente.email = action.payload
         },
-        setNumber:(state, action) => {
+        setNumber: (state, action) => {
             state.multiStepFormValue.cliente.apellido = action.payload
         },
-        setPedido:(state, action) => {
+        setPedido: (state, action) => {
             state.multiStepFormValue.mensaje = action.payload
         },
-        setId:(state, action) => {
+        setId: (state, action) => {
             state.id = action.payload
         },
     }
 })
 
-export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia} = formStateSlice.actions;
+export const { setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia } = formStateSlice.actions;
 
 export const setInitialState = () => (dispatch) => {
     dispatch(setCantidadPersonas(1))//Set personas
@@ -92,8 +91,8 @@ export const guardarDia = (dia) => (dispatch) => {
     dispatch(setDia(dia))
 }
 
-export const guardarHora = (hora) => (dispatch) => { 
-        dispatch(setHora(hora))
+export const guardarHora = (hora) => (dispatch) => {
+    dispatch(setHora(hora))
 }
 
 export const guardarNombre = (nombre) => (dispatch) => {
@@ -113,40 +112,39 @@ export const guardarPedido = (mensaje) => (dispatch) => {
 }
 
 export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (dispatch) => {
-    fetch(`${baseURL}api/reserva`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        dia: formatDate(multiStepFormValue.dia),
-        hora: multiStepFormValue.hora
-      }),
+    fetch(baseUrl, {
+        method: "POST",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            dia: formatDate(multiStepFormValue.dia),
+            hora: multiStepFormValue.hora
+        }),
     }).then(res => {
         res.json()
-       // console.log(res.json())
+        // console.log(res.json())
         //console.log(res)
     })
-    .then(res => {
-    console.log("Post reserva" + formatDate(multiStepFormValue.dia) + multiStepFormValue.hora)
+        .then(res => {
+            console.log("Post reserva" + formatDate(multiStepFormValue.dia) + multiStepFormValue.hora)
 
-      //console.log(res)
-      dispatchId(setId(res.id))
-    }).catch(err => console(err))
-    ;
-  };
+            //console.log(res)
+            dispatchId(setId(res.id))
+        }).catch(err => console(err))
+        ;
+};
 
 
-  export const getReservasPorDia = (dia) => (dispatch) => {
-    const diaActualizado = dia.replace("/","%2F")
-    const diaActualizado2 = diaActualizado.replace("/","%2F")
-    axios.get(`${baseURL}api/reserva/findByDia/${diaActualizado2}`).then(res => 
-{
+export const getReservasPorDia = (dia) => (dispatch) => {
+    const diaActualizado = dia.replace("/", "%2F")
+    const diaActualizado2 = diaActualizado.replace("/", "%2F")
+    axios.get(`${baseUrl}/findByDia/${diaActualizado2}`).then(res => {
 
-//console.log(res.data)
-dispatch(setBuscarReservasDelDia(res.data))
-   }); 
+        //console.log(res.data)
+        dispatch(setBuscarReservasDelDia(res.data))
+    });
 
 };
 
