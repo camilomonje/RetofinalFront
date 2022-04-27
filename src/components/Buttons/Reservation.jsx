@@ -32,8 +32,12 @@ export const Reservation = () => {
       })
   }
 
+  const handleClick = () => {
+    modificarPedido()
+    postEmail()
+  }
+
   const modificarPedido = () => {
-    console.log("Aqui el nuevo pedido: " + input2)
     fetch(baseUrl + endPoint, {
       method: "PUT",
       headers: {
@@ -63,6 +67,31 @@ export const Reservation = () => {
         console.error(error)
       })
   }
+  const postEmail = () => {
+    fetch(`${baseUrl}sendEmailModification`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cantidadPersonas: reserva.cantidadPersonas,
+        cliente: {
+          apellido: reserva.cliente.apellido,
+          email: reserva.cliente.email,
+          nombre: reserva.cliente.nombre,
+        },
+        dia: reserva.dia,
+        hora: reserva.hora,
+        mensaje: input2,
+        telefono: reserva.telefono,
+      }),
+    })
+      .then((res) => res)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  }
+
   const cancelarModificacion = () => {
     modificando(false)
     setInput2("")
@@ -215,7 +244,7 @@ export const Reservation = () => {
             }}
           />
           <br />
-          <Button variant="outlined" className="mt-2" onClick={() => modificarPedido()}>
+          <Button variant="outlined" className="mt-2" onClick={() => handleClick()}>
             Guardar modificación
           </Button>
           <Button variant="outlined" className="mt-2" onClick={() => cancelarModificacion()}>

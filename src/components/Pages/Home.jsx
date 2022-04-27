@@ -20,9 +20,7 @@ const Home = () => {
             <div className="card-body">
               <h5 className="card-title">Reserva</h5>
               <p className="card-text">Reserva nuestra mesa exclusiva</p>
-              <Dialog>
-                <Reservar />
-              </Dialog>
+              <Dialog />
             </div>
           </div>
         </div>
