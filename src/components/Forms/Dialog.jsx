@@ -7,7 +7,12 @@ import DialogTitle from "@mui/material/DialogTitle"
 import DialogContent from "@mui/material/DialogContent"
 import IconButton from "@mui/material/IconButton"
 import CloseIcon from "@mui/icons-material/Close"
-import ShowReservations from "../Buttons/ShowReservations"
+import axios from "axios"
+import { useSelector } from "react-redux"
+
+import { useDispatch } from "react-redux"
+
+const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -18,16 +23,27 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }))
 
+
+const borrarReserva = (id) => {
+  axios.delete(`${baseURL}api/reserva/${id}`) 
+}
+
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, ...other } = props
+  const {id } = useSelector( state => state.formState )
+  const dispatchCloseForm = useDispatch()
 
+  
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
           aria-label="close"
-          onClick={onClose}
+          onClick={()=>{
+            onClose()
+            borrarReserva(id)
+          }}
           sx={{
             position: "absolute",
             right: 8,

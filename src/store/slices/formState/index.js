@@ -63,6 +63,8 @@ export const formStateSlice = createSlice({
 
 export const {setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia} = formStateSlice.actions;
 
+
+
 export const guardarCantidadPersonas = (cantidadPersonas) => (dispatch) => {
     dispatch(setCantidadPersonas(cantidadPersonas))
 }
@@ -112,13 +114,13 @@ export const postReservaReducer = (multiStepFormValue, dispatchId, setId) => (di
       }),
     }).then(res => {
         res.json()
-        console.log(res.json())
-        console.log(res)
+       // console.log(res.json())
+        //console.log(res)
     })
     .then(res => {
     console.log("Post reserva" + formatDate(multiStepFormValue.dia) + multiStepFormValue.hora)
 
-      console.log(res)
+      //console.log(res)
       dispatchId(setId(res.id))
     }).catch(err => console(err))
     ;
