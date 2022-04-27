@@ -1,10 +1,10 @@
 import React from "react"
 import { ContainerForm } from "../Forms/ContainerForm"
 
-const Reservar = () => {
+const Reservar = ({onClose}) => {
   return (
     <div>
-      <ContainerForm />
+      <ContainerForm onClose={onClose}/>
     </div>
   )
 }

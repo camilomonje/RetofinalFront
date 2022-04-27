@@ -11,6 +11,7 @@ import axios from "axios"
 import { useSelector } from "react-redux"
 
 import { useDispatch } from "react-redux"
+import Reservar from "../Pages/Reservar"
 
 const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
 
@@ -63,7 +64,7 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 }
 
-export default function CustomizedDialogs({ children }) {
+export default function CustomizedDialogs() {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -87,7 +88,11 @@ export default function CustomizedDialogs({ children }) {
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
           Cree su reservar
         </BootstrapDialogTitle>
-        <DialogContent dividers>{children}</DialogContent>
+        <DialogContent dividers>
+      
+          <Reservar onClose={handleClose}/>
+
+        </DialogContent>
       </BootstrapDialog>
     </div>
   )

@@ -19,7 +19,7 @@ const baseURL = "https://app-reserva-restaurante-back.herokuapp.com/"
 
 
 
-export const ContainerForm = () => {
+export const ContainerForm = ({onClose}) => {
 
     const {multiStepFormValue, id} = useSelector( state => state.formState )
     const dispatchId = useDispatch()
@@ -117,6 +117,7 @@ export const ContainerForm = () => {
             console.log(values)
             putReserva(id)
             postEmail()
+            onClose()
           }}
         >
           <FormStep 
