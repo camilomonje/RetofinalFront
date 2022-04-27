@@ -12,9 +12,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}>
-          **<Route index element={<Home />} />**
-          <Route path="reservar" element={<Reservar />} />
+        <Route path="/" element={ <App /> }>
+          **<Route index element={ <Home /> } />**
+{/*           <Route path="nosotros" element={ <AboutUs /> } />
+          <Route path="contacto" element={ <ContactUs /> } /> */}
+          <Route path="reservar" element={ <Reservar /> } />  
           <Route path="*" element={
             <p>
               Página no encontrada
