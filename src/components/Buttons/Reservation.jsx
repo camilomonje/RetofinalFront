@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import { useState } from "react"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
@@ -7,8 +7,7 @@ import Alert from "@mui/material/Alert"
 import Stack from "@mui/material/Stack"
 
 export const Reservation = () => {
-
-    const [buscador, setBuscador] = useState(false)
+  const [buscador, setBuscador] = useState(false)
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
   const [reserva, setReserva] = useState([])
@@ -71,97 +70,109 @@ export const Reservation = () => {
 
   return (
     <div>
+      <TextField
+        label="Código de reseva"
+        variant="outlined"
+        onChange={(e) => {
+          setInput(e.target.value)
+          setBusquedaRealizada(false)
+          setError("")
+        }}
+      />
+      <br />
+      <Button variant="outlined" onClick={() => setBuscador(false)}>
+        Cancelar
+      </Button>
+      <Button variant="outlined" onClick={search}>
+        Buscar
+      </Button>
+      {busquedaRealizada ? (
+        <Box
+          component="form"
+          sx={{
+            "& .MuiTextField-root": { m: 1, width: "50ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
           <br />
-          <label>Ingresa tu código de reserva</label>
-          <br />
+          <div>
+            <h4>Reserva</h4>
+            <TextField id="day-disabled" disabled label="Día de la reserva" defaultValue={reserva.dia} />
+            <TextField id="time-disabled" disabled label="Hora de la reserva" defaultValue={reserva.hora} />
+            <TextField
+              id="customername-disabled"
+              disabled
+              label="Nombre del cliente"
+              defaultValue={reserva.cliente.nombre}
+            />
+            <TextField
+              id="customersurname-disabled"
+              disabled
+              label="Apellido del cliente"
+              defaultValue={reserva.cliente.apellido}
+            />
+            <TextField
+              id="customeremail-disabled"
+              disabled
+              label="Correo electrónico"
+              defaultValue={reserva.cliente.email}
+            />
+            <TextField
+              id="customerphone-disabled"
+              disabled
+              label="Número de teléfono"
+              defaultValue={reserva.telefono}
+            />
+            <TextField
+              id="customerperson-disabled"
+              disabled
+              label="Cantidad de personas"
+              defaultValue={reserva.cantidadPersonas}
+            />
+            <TextField id="order-disabled" disabled label="Pedido" defaultValue={reserva.mensaje} />
+            <Button variant="outlined" onClick={() => setModificando(true)}>
+              Modificar pedido
+            </Button>
+            <Button variant="outlined">Cancelar reserva</Button>
+          </div>
+        </Box>
+      ) : (
+        <></>
+      )}
+      {modificando ? (
+        <div>
+          <p className="mt-3">Modifica tu pedido aquí</p>
           <TextField
-            label="Código de reseva"
-            variant="outlined"
+            id="customersurname-disabled"
+            label="Nuevo pedido"
+            multiline
+            rows={4}
             onChange={(e) => {
-              setInput(e.target.value)
+              setInput2(e.target.value)
               setBusquedaRealizada(false)
               setError("")
             }}
           />
           <br />
-          <Button variant="outlined" onClick={() => setBuscador(false)}>
-            Cancelar
+          <Button variant="outlined" className="mt-2" onClick={() => modificarPedido()}>
+            Guardar modificación
           </Button>
-          <Button variant="outlined" onClick={search}>
-            Buscar
+          <Button variant="outlined" className="mt-2" onClick={() => cancelarModificacion()}>
+            Cancelar modificación
           </Button>
-          {busquedaRealizada ? (
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "50ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <br />
-              <div>
-                <h4>Reserva</h4>
-                <TextField id="day-disabled" disabled label="Día de la reserva" defaultValue={reserva.dia} />
-                <TextField id="time-disabled" disabled label="Hora de la reserva" defaultValue={reserva.hora} />
-                <TextField
-                  id="customername-disabled"
-                  disabled
-                  label="Nombre del cliente"
-                  defaultValue={reserva.cliente.nombre}
-                />
-                <TextField
-                  id="customersurname-disabled"
-                  disabled
-                  label="Apellido del cliente"
-                  defaultValue={reserva.cliente.apellido}
-                />
-                <TextField
-                  id="customeremail-disabled"
-                  disabled
-                  label="Correo electrónico"
-                  defaultValue={reserva.cliente.email}
-                />
-                <TextField id="order-disabled" disabled label="Pedido" defaultValue={reserva.mensaje} />
-                <Button variant="outlined" onClick={() => setModificando(true)}>
-                  Modificar pedido
-                </Button>
-                <Button variant="outlined">Cancelar reserva</Button>
-              </div>
-            </Box>
-          ) : (
-            <></>
-          )}
-          {modificando ? (
-            <div>
-              <p>Modificando el pedido</p>
-              <TextField
-                id="customersurname-disabled"
-                label="Nuevo pedido"
-                onChange={(e) => {
-                  setInput2(e.target.value)
-                  setBusquedaRealizada(false)
-                  setError("")
-                }}
-              />
-              <Button variant="outlined" onClick={() => modificarPedido()}>
-                Guardar modificación
-              </Button>
-              <Button variant="outlined" onClick={() => cancelarModificacion()}>
-                Cancelar modificación
-              </Button>
-            </div>
-          ) : (
-            <></>
-          )}
-
-          {error ? (
-            <Stack sx={{ width: "100%" }} spacing={2}>
-              <Alert severity="error">No hay reservaciones con este código</Alert>
-            </Stack>
-          ) : (
-            <></>
-          )}
         </div>
+      ) : (
+        <></>
+      )}
+
+      {error ? (
+        <Stack sx={{ width: "100%" }} spacing={2}>
+          <Alert severity="error">No hay reservaciones con este código</Alert>
+        </Stack>
+      ) : (
+        <></>
+      )}
+    </div>
   )
 }
