@@ -132,7 +132,7 @@ export const Reservation = () => {
             />
             <TextField id="order-disabled" disabled label="Pedido" defaultValue={reserva.mensaje} />
             <Button variant="outlined" onClick={() => setModificando(true)}>
-              Modificar pedido
+              Modificar reserva
             </Button>
             <Button variant="outlined">Cancelar reserva</Button>
           </div>

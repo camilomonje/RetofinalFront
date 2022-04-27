@@ -60,15 +60,12 @@ export default function DialogButtons({ children }) {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Reservar
+        Mis reservas
       </Button>
 
-      <BootstrapDialog
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
+      <BootstrapDialog aria-labelledby="customized-dialog-title" open={open}>
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Modifique su reserva
+          Busca tu reserva
         </BootstrapDialogTitle>
         <DialogContent dividers>{children}</DialogContent>
       </BootstrapDialog>
