@@ -126,7 +126,7 @@ export const ContainerForm = ({ onClose }) => {
   return (
     <Card
       variant="outlined"
-      style={{ maxWidth: 605, minHeight: 205, minWidth: 435, margin: "0 auto", padding: "20px 5px" }}
+      style={{ maxWidth: 605, minHeight: 205, minWidth: 155, margin: "0 auto", padding: "20px 5px" }}
     >
       <div className="App">
         <header className="App-header">
