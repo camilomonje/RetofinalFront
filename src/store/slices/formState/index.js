@@ -25,8 +25,18 @@ export const formStateSlice = createSlice({
         },
         id: '',
         reservasDelDia: [],
+        alertasForm:{
+            formExitoso: false,
+            formFeo: false
+        }
     },
     reducers: {
+        setFormFeo: (state, action) => {
+            state.alertasForm.formFeo = action.payload
+        },
+        setFormExitoso: (state, action) => {
+            state.alertasForm.formExitoso = action.payload
+        },
         setBuscarReservasDelDia: (state, action) => {
             state.reservasDelDia = action.payload
         },
@@ -60,7 +70,15 @@ export const formStateSlice = createSlice({
     }
 })
 
-export const { setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia } = formStateSlice.actions;
+export const { setFormFeo ,setFormExitoso ,setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia } = formStateSlice.actions;
+
+export const seeAlertFea = (bool) => (dispatch) => {
+    dispatch(setFormFeo(bool))
+}
+
+export const seeAlertExitosa = (bool) => (dispatch) => {
+    dispatch(setFormExitoso(bool))
+}
 
 export const setInitialState = () => (dispatch) => {
     dispatch(setCantidadPersonas(1))//Set personas

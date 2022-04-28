@@ -8,12 +8,13 @@ export const FormNavigation = (props) => {
         style={{
             display: 'flex',
             marginTop: 50,
-            justifyContent: 'space-between'
+            minWidth: 20,
+            justifyContent: 'center'
         }}
     >
         {props.hasPrevious && <Button onClick={props.onBackClick} type='button' variant='contained' >Back</Button>}
 
-        <Button variant='outlined' type='submit' color='primary' >{props.isLastStep ? 'Submit' : 'Next'}</Button>
+        <Button variant='outlined' type='submit' color='primary' >{props.isLastStep ? 'Reservar' : 'Next'}</Button>
     </div>
   )
 }
