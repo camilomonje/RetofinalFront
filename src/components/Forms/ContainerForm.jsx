@@ -11,7 +11,14 @@ import { DateField } from "./DateField"
 import { TextAreaField } from "./TextAreaField"
 
 import { useSelector, useDispatch } from "react-redux"
-import { getReservasPorDia, postReservaReducer, setFormExitoso, setFormFeo, setId, setInitialState } from "../../store/slices/formState"
+import {
+  getReservasPorDia,
+  postReservaReducer,
+  setFormExitoso,
+  setFormFeo,
+  setId,
+  setInitialState,
+} from "../../store/slices/formState"
 import { InputPersonas } from "./InputPersonas"
 
 const baseUrl = `${process.env.REACT_APP_API_URL}`
@@ -126,10 +133,7 @@ export const ContainerForm = ({ onClose }) => {
   }
 
   return (
-    <Card
-      variant="outlined"
-      style={{ maxWidth: 605, minHeight: 205, minWidth: 100, margin: "0 auto",  }}
-    >
+    <Card variant="outlined" style={{ maxWidth: 605, minHeight: 205, minWidth: 100, margin: "0 auto" }}>
       <div className="App">
         <header className="App-header">
           <MultiStepForm
@@ -142,25 +146,24 @@ export const ContainerForm = ({ onClose }) => {
               pedido: "",
             }}
             onSubmit={(values) => {
-              if(multiStepFormValue.hora === '08:00'){
+              if (multiStepFormValue.hora === "08:00") {
                 //postEmailError()
                 //onClose()
                 //dispatchSetInitialState(setInitialState())
                 dispatchFea(setFormFeo(true))
                 setTimeout(() => {
                   dispatchFea(setFormFeo(false))
-                }, 4000);
-              }else{
+                }, 4000)
+              } else {
                 dispatchAlerta(setFormExitoso(true))
                 setTimeout(() => {
                   dispatchAlerta(setFormExitoso(false))
-                }, 2000);
-              putReserva(id)
-              postEmail()
-              onClose()
-              dispatchSetInitialState(setInitialState())
+                }, 2000)
+                putReserva(id)
+                postEmail()
+                onClose()
+                dispatchSetInitialState(setInitialState())
               }
-              
             }}
           >
             <FormStep
@@ -189,10 +192,10 @@ export const ContainerForm = ({ onClose }) => {
 
               <InputField type="email" name="email" label="Email" />
 
-              <InputField type="number" name="telefono" label="Telefono" />
+              <InputField type="number" name="telefono" label="Teléfono" />
             </FormStep>
 
-            <FormStep  stepName="Ord" onSubmit={() => console.log("Step 4 submit")}>
+            <FormStep stepName="Ord" onSubmit={() => console.log("Step 4 submit")}>
               <InputPersonas name="personas" label="Cantidad Personas" />
 
               <TextAreaField name="pedido" label="Pedido" />

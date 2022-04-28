@@ -149,7 +149,7 @@ export const Reservation = ({ onClose }) => {
       onClose()
     } else {
       onClose()
-      alert("Fuera de rango de hora para modificar la reserva, comuniquese con el administrador del restaurante")
+      alert("Fuera del rango de hora para modificar la reserva, comuníquese con el administrador del restaurante")
     }
   }
 
@@ -168,14 +168,12 @@ export const Reservation = ({ onClose }) => {
       cancelarReserva()
       enviarEmailCancelar()
     } else {
-      alert("Fuera de rango de hora para cancelar, comuniquese con el administrador del restaurante")
+      alert("Fuera del rango de hora para cancelar, comuníquese con el administrador del restaurante")
     }
   }
 
   const cancelarReserva = () => {
-    console.log("Prueba delete", baseUrl + endPoint)
-
-    if (window.confirm("¿Esta seguro de querer cancelar su reserva?")) {
+    if (window.confirm("¿Está seguro de querer cancelar su reserva?")) {
       fetch(baseUrl + endPoint, {
         method: "DELETE",
         headers: {
@@ -319,10 +317,14 @@ export const Reservation = ({ onClose }) => {
           >
             Guardar modificación
           </Button>
-          <Button variant="outlined" className="mt-2" onClick={() => {
-            cancelarModificacion()
-            onClose()
-          }}>
+          <Button
+            variant="outlined"
+            className="mt-2"
+            onClick={() => {
+              cancelarModificacion()
+              onClose()
+            }}
+          >
             Cancelar modificación
           </Button>
         </div>

@@ -36,7 +36,7 @@ const BootstrapDialogTitle = (props) => {
   const dispatchCloseForm = useDispatch()
 
   return (
-    <DialogTitle sx={{ m: 2, p: 2}} {...other}>
+    <DialogTitle sx={{ m: 2, p: 2 }} {...other}>
       {children}
       {onClose ? (
         <IconButton
@@ -75,21 +75,21 @@ export default function CustomizedDialogs() {
   }
 
   return (
-    <Box >
+    <Box>
       <Button variant="outlined" onClick={handleClickOpen}>
         Reservar
       </Button>
 
       <BootstrapDialog
-        style={{minWidth: 320}}
+        style={{ minWidth: 320 }}
         //onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         open={open}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
-          Cree su reservar
+          Cree su reserva
         </BootstrapDialogTitle>
-        <DialogContent   dividers>
+        <DialogContent dividers>
           <Reservar onClose={handleClose} />
         </DialogContent>
       </BootstrapDialog>
