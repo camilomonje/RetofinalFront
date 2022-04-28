@@ -18,6 +18,7 @@ export const InputPersonas = ({label}) => {
         <Box style={{ padding:'20px 20px'}}>
         <Typography style={{marginTop:"25px"}}>Numero De personas {multiStepFormValue.cantidadPersonas}</Typography>
         <Slider
+            min={10}
             value={cantidadPersonas}
             onChange={handleChange}
         />
