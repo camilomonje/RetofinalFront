@@ -103,6 +103,7 @@ export const Reservation = ({onClose}) => {
   }
 
   const cancelarModificacion = () => {
+    onClose()
     modificando(false)
     setInput2("")
   }
@@ -306,7 +307,10 @@ export const Reservation = ({onClose}) => {
           <Button variant="outlined" className="mt-2" onClick={() => handleClick()}>
             Guardar modificación
           </Button>
-          <Button variant="outlined" className="mt-2" onClick={() => cancelarModificacion()}>
+          <Button variant="outlined" className="mt-2" onClick={() => {
+            cancelarModificacion()
+            onClose()
+          }}>
             Cancelar modificación
           </Button>
         </div>
