@@ -152,6 +152,9 @@ export const ContainerForm = ({ onClose }) => {
                 }, 4000);
               }else{
                 dispatchAlerta(setFormExitoso(true))
+                setTimeout(() => {
+                  dispatchAlerta(setFormExitoso(true))
+                }, 4000);
               putReserva(id)
               postEmail()
               onClose()
