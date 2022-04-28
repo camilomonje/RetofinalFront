@@ -9,8 +9,7 @@ import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { seeAlertActualizada } from "../../store/slices/formState"
 
-export const Reservation = ({onClose}) => {
-
+export const Reservation = ({ onClose }) => {
   const dispatchAlertActualizada = useDispatch()
 
   const [buscador, setBuscador] = useState(false)
@@ -25,18 +24,18 @@ export const Reservation = ({onClose}) => {
   const endPoint = `${input}`
 
   const search = () => {
-    if(input.length > 0){
+    if (input.length > 0) {
       fetch(baseUrl + endPoint)
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        setReserva(data)
-        setBusquedaRealizada(true)
-      })
-      .catch((error) => {
-        setError(error)
-      })
+        .then((response) => {
+          return response.json()
+        })
+        .then((data) => {
+          setReserva(data)
+          setBusquedaRealizada(true)
+        })
+        .catch((error) => {
+          setError(error)
+        })
     }
   }
 
@@ -143,7 +142,7 @@ export const Reservation = ({onClose}) => {
       dispatchAlertActualizada(seeAlertActualizada(true))
       setTimeout(() => {
         dispatchAlertActualizada(seeAlertActualizada(false))
-      }, 4000);
+      }, 4000)
       modificarPedido()
       postEmail()
       onClose()
@@ -223,10 +222,13 @@ export const Reservation = ({onClose}) => {
         }}
       />
       <br />
-      <Button variant="outlined" onClick={() => {
-        setBuscador(false)
-        onClose()
-      }}>
+      <Button
+        variant="outlined"
+        onClick={() => {
+          setBuscador(false)
+          onClose()
+        }}
+      >
         Cancelar
       </Button>
       <Button variant="outlined" onClick={search}>
@@ -292,9 +294,11 @@ export const Reservation = ({onClose}) => {
         <div>
           <p className="mt-3">Modifica tu pedido aquí</p>
           <TextField
+            required
             id="customersurname-disabled"
             label="Nuevo pedido"
             multiline
+            value={input2}
             rows={4}
             onChange={(e) => {
               setInput2(e.target.value)
@@ -303,7 +307,15 @@ export const Reservation = ({onClose}) => {
             }}
           />
           <br />
-          <Button variant="outlined" className="mt-2" onClick={() => handleClick()}>
+          <Button
+            variant="outlined"
+            className="mt-2"
+            onClick={() => {
+              if (input2) {
+                handleClick()
+              }
+            }}
+          >
             Guardar modificación
           </Button>
           <Button variant="outlined" className="mt-2" onClick={() => cancelarModificacion()}>
