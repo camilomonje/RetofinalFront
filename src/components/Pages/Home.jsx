@@ -18,7 +18,7 @@ const Home = () => {
         alertasForm.formExitoso && <AlertNice mensaje={`Reserva exitosa revise su correo para ver su codigo`}/>
       }
       {
-        alertasForm.formFeo && <AlertNice mensaje={"Campos incompletos, por favor revisar"} exito={false}/>
+        alertasForm.formFeo && <AlertNice mensaje={"Seleccione una Hora por favor"} exito={false}/>
       }
       <div className="row">
         <div className="col-sm-6">
