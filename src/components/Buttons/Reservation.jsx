@@ -86,6 +86,7 @@ export const Reservation = (props) => {
         hora: reserva.hora,
         mensaje: input2,
         telefono: reserva.telefono,
+        id: input,
       }),
     })
       .then((res) => res)
@@ -116,6 +117,7 @@ export const Reservation = (props) => {
         hora: reserva.hora,
         mensaje: input2,
         telefono: reserva.telefono,
+        id: input,
       }),
     })
       .then((res) => res)
