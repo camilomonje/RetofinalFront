@@ -19,7 +19,8 @@ export const Reservation = (props) => {
   const endPoint = `${input}`
 
   const search = () => {
-    fetch(baseUrl + endPoint)
+    if(input.length > 0){
+      fetch(baseUrl + endPoint)
       .then((response) => {
         return response.json()
       })
@@ -30,6 +31,7 @@ export const Reservation = (props) => {
       .catch((error) => {
         setError(error)
       })
+    }
   }
 
   const handleClick = () => {
@@ -201,6 +203,8 @@ export const Reservation = (props) => {
       <TextField
         label="Código de reseva"
         variant="outlined"
+        required
+        value={input}
         onChange={(e) => {
           setInput(e.target.value)
           setBusquedaRealizada(false)

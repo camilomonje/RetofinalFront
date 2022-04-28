@@ -21,8 +21,8 @@ export const AlertNice = ({mensaje, exito = true}) => {
       setOpen(false);
     };
   return (
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity={exito ? "success" : 'error'} sx={{ width: '100%' }}>
+    <Snackbar anchorOrigin={{ vertical:'top', horizontal:'center' }} open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert  onClose={handleClose} severity={exito ? "success" : 'error'} sx={{ width: '100%' }}>
           {mensaje}
         </Alert>
       </Snackbar>
