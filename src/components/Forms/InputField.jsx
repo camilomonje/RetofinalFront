@@ -4,7 +4,7 @@ import { TextField } from '@mui/material'
 import { useDispatch } from 'react-redux';
 import { guardarEmail, guardarNombre, guardarNumero, guardarTelefono } from '../../store/slices/formState';
 
-export const InputField = ({label}) => {
+export const InputField = ({label, type='text'}) => {
 
   const dispatchName = useDispatch()
   const dispatchEmail = useDispatch()
@@ -21,10 +21,11 @@ export const InputField = ({label}) => {
         break;
       case 'Telefono': dispatchTelefono(guardarTelefono(e.target.value.toString()))
         break;
-    }
+    }//tel email
   }
     return (
     <TextField
+        type={type}
         fullWidth 
         label={label}
         onChange={handleChange}

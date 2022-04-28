@@ -184,9 +184,9 @@ export const ContainerForm = ({ onClose }) => {
 
               <InputField name="number" label="Apellido" />
 
-              <InputField name="email" label="Email" />
+              <InputField type="email" name="email" label="Email" />
 
-              <InputField name="telefono" label="Telefono" />
+              <InputField type="number" name="telefono" label="Telefono" />
             </FormStep>
 
             <FormStep  stepName="Ord" onSubmit={() => console.log("Step 4 submit")}>

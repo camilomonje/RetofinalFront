@@ -18,6 +18,12 @@ const Home = () => {
         alertasForm.formExitoso && <AlertNice mensaje={`Reserva exitosa revise su correo para ver su codigo`}/>
       }
       {
+        alertasForm.formActualizado && <AlertNice mensaje={`Reserva actualizada con exito`}/>
+      }
+      {
+        alertasForm.formHoraInvalida && <AlertNice exito={false} mensaje={`"No es posible realizar la cancelación porque no está dentro del tiempo permitido, debe ser con mínimo dos horas de anticipación !Comuníquese por favor con el restaurante!"`}/>
+      }
+      {
         alertasForm.formFeo && <AlertNice mensaje={"Seleccione una Hora por favor"} exito={false}/>
       }
       <div className="row">

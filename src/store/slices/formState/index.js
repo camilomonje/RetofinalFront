@@ -27,10 +27,18 @@ export const formStateSlice = createSlice({
         reservasDelDia: [],
         alertasForm:{
             formExitoso: false,
-            formFeo: false
+            formFeo: false,
+            formActualizado: false,
+            formHoraInvalida: false,
         }
     },
     reducers: {
+        setFormHoraInvalida: (state, action) => {
+            state.alertasForm.formHoraInvalida = action.payload
+        },
+        setFormActualizado: (state, action) => {
+            state.alertasForm.formActualizado = action.payload
+        },
         setFormFeo: (state, action) => {
             state.alertasForm.formFeo = action.payload
         },
@@ -70,7 +78,15 @@ export const formStateSlice = createSlice({
     }
 })
 
-export const { setFormFeo ,setFormExitoso ,setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia } = formStateSlice.actions;
+export const { setFormHoraInvalida ,setFormActualizado ,setFormFeo ,setFormExitoso ,setDia, setHora, setName, setEmail, setNumber, setPedido, setId, setCantidadPersonas, setTelefono, setBuscarReservasDelDia } = formStateSlice.actions;
+
+export const seeAlertHoraInvalida = (bool) => (dispatch) => {
+    dispatch(setFormHoraInvalida(bool))
+}
+
+export const seeAlertActualizada = (bool) => (dispatch) => {
+    dispatch(setFormActualizado(bool))
+}
 
 export const seeAlertFea = (bool) => (dispatch) => {
     dispatch(setFormFeo(bool))
@@ -122,7 +138,7 @@ export const guardarEmail = (email) => (dispatch) => {
 }
 
 export const guardarNumero = (numero) => (dispatch) => {
-    dispatch(setNumber(numero))
+    dispatch(setNumber(numero.toString()))
 }
 
 export const guardarPedido = (mensaje) => (dispatch) => {
