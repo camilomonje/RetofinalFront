@@ -29,7 +29,6 @@ export const MultiStepForm = ({children, initialValues, onSubmit}) => {
             setSnapshot(values)
         setStepNumber(stepNumber + 1)
         }
-        
     }
     //setSnapshot(values)
     //setStepNumber(stepNumber + 1)

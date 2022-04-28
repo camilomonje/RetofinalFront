@@ -5,8 +5,14 @@ import TextField from "@mui/material/TextField"
 import Box from "@mui/material/Box"
 import Alert from "@mui/material/Alert"
 import Stack from "@mui/material/Stack"
+import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { seeAlertActualizada } from "../../store/slices/formState"
 
-export const Reservation = (props) => {
+export const Reservation = ({onClose}) => {
+
+  const dispatchAlertActualizada = useDispatch()
+
   const [buscador, setBuscador] = useState(false)
   const [input, setInput] = useState("")
   const [input2, setInput2] = useState("")
@@ -68,7 +74,7 @@ export const Reservation = (props) => {
         console.error(error)
       })
 
-    props.onClose()
+    onClose()
   }
   const postEmail = () => {
     fetch(`${baseUrl}sendEmailModification`, {
@@ -134,11 +140,15 @@ export const Reservation = (props) => {
       [diaSplit[2], diaSplit[0], diaSplit[1]].map((d) => (d.length == 1 ? "0" + d : d)).join("-") + "T" + reserva.hora
     )
     if (dateReserva - dateActual > 7200000) {
+      dispatchAlertActualizada(seeAlertActualizada(true))
+      setTimeout(() => {
+        dispatchAlertActualizada(seeAlertActualizada(false))
+      }, 4000);
       modificarPedido()
       postEmail()
-      props.onClose()
+      onClose()
     } else {
-      props.onClose()
+      onClose()
       alert("Fuera de rango de hora para modificar la reserva, comuniquese con el administrador del restaurante")
     }
   }
@@ -196,6 +206,7 @@ export const Reservation = (props) => {
           console.error(error)
         })
     }
+    onClose()
   }
 
   return (
@@ -212,7 +223,10 @@ export const Reservation = (props) => {
         }}
       />
       <br />
-      <Button variant="outlined" onClick={() => setBuscador(false)}>
+      <Button variant="outlined" onClick={() => {
+        setBuscador(false)
+        onClose()
+      }}>
         Cancelar
       </Button>
       <Button variant="outlined" onClick={search}>
