@@ -4,20 +4,29 @@ import imagenalmuerzo from "../../assets/img/almuerzo1.jpg"
 import Footer from "./Footer"
 import Dialog from "../Forms/Dialog"
 import DialogButtons from "../Buttons/DialogButtons"
-
+import { useSelector, useDispatch } from "react-redux"
+import { AlertNice } from "../Alertas/AlertNice"
 const Home = () => {
+  const { alertasForm } = useSelector((state) => state.formState)
+  
   return (
     <div>
       <div className="card mb-3 align-items-center">
         <img src={imagenlogo} className="img-fluid" />
       </div>
+      {
+        alertasForm.formExitoso && <AlertNice mensaje={`Reserva exitosa revise su correo para ver su codigo`}/>
+      }
+      {
+        alertasForm.formFeo && <AlertNice mensaje={"Campos incompletos, por favor revisar"} exito={false}/>
+      }
       <div className="row">
         <div className="col-sm-6">
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">Reserva</h5>
               <p className="card-text">Reserva nuestra mesa exclusiva</p>
-              <Dialog />
+              <Dialog fullScreen={true} />
             </div>
           </div>
         </div>
@@ -26,7 +35,6 @@ const Home = () => {
             <div className="card-body">
               <h5 className="card-title">Mis reservas</h5>
               <p className="card-text">¡Busca aquí tus reservas pendientes!</p>
-
               <DialogButtons />
             </div>
           </div>

@@ -11,7 +11,7 @@ import { DateField } from "./DateField"
 import { TextAreaField } from "./TextAreaField"
 
 import { useSelector, useDispatch } from "react-redux"
-import { getReservasPorDia, postReservaReducer, setId, setInitialState } from "../../store/slices/formState"
+import { getReservasPorDia, postReservaReducer, setFormExitoso, setFormFeo, setId, setInitialState } from "../../store/slices/formState"
 import { InputPersonas } from "./InputPersonas"
 
 const baseUrl = `${process.env.REACT_APP_API_URL}`
@@ -21,6 +21,8 @@ export const ContainerForm = ({ onClose }) => {
   const dispatchId = useDispatch()
   const dispatchGet = useDispatch()
   const dispatchSetInitialState = useDispatch()
+  const dispatchAlerta = useDispatch()
+  const dispatchFea = useDispatch()
 
   const formatDate = (string) => {
     let date = new Date(string)
@@ -126,7 +128,7 @@ export const ContainerForm = ({ onClose }) => {
   return (
     <Card
       variant="outlined"
-      style={{ maxWidth: 605, minHeight: 205, minWidth: 435, margin: "0 auto", padding: "20px 5px" }}
+      style={{ maxWidth: 605, minHeight: 205, minWidth: 100, margin: "0 auto",  }}
     >
       <div className="App">
         <header className="App-header">
@@ -141,12 +143,15 @@ export const ContainerForm = ({ onClose }) => {
             }}
             onSubmit={(values) => {
               if(multiStepFormValue.hora === '08:00'){
-                postEmailError()
-                onClose()
-                dispatchSetInitialState(setInitialState())
+                //postEmailError()
+                //onClose()
+                //dispatchSetInitialState(setInitialState())
+                dispatchFea(setFormFeo(true))
+                setTimeout(() => {
+                  dispatchFea(setFormFeo(false))
+                }, 4000);
               }else{
-                console.log(values)
-                console.log("else")
+                dispatchAlerta(setFormExitoso(true))
               putReserva(id)
               postEmail()
               onClose()
@@ -156,7 +161,7 @@ export const ContainerForm = ({ onClose }) => {
             }}
           >
             <FormStep
-              stepName="Date"
+              stepName="Day"
               onSubmit={() => dispatchGet(getReservasPorDia(formatDate(multiStepFormValue.dia)))}
             >
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -165,7 +170,7 @@ export const ContainerForm = ({ onClose }) => {
             </FormStep>
 
             <FormStep
-              stepName="Hora"
+              stepName="Time"
               onSubmit={() => {
                 postReserva()
                 //dispatchPost(postReservaReducer(multiStepFormValue, dispatchId, setId))
@@ -174,7 +179,7 @@ export const ContainerForm = ({ onClose }) => {
               <RadioButtons />
             </FormStep>
 
-            <FormStep stepName="Contacto" onSubmit={() => console.log("Step 3 submit")}>
+            <FormStep stepName="Name" onSubmit={() => console.log("Step 3 submit")}>
               <InputField name="name" label="Nombre" />
 
               <InputField name="number" label="Apellido" />
@@ -184,7 +189,7 @@ export const ContainerForm = ({ onClose }) => {
               <InputField name="telefono" label="Telefono" />
             </FormStep>
 
-            <FormStep stepName="Pedido" onSubmit={() => console.log("Step 4 submit")}>
+            <FormStep  stepName="Ord" onSubmit={() => console.log("Step 4 submit")}>
               <InputPersonas name="personas" label="Cantidad Personas" />
 
               <TextAreaField name="pedido" label="Pedido" />
